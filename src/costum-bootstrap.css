@@ -1,0 +1,10 @@
+:root {
+    --primary-color: #1eff00;
+    
+}
+
+
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
