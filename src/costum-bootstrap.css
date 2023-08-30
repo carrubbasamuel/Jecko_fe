@@ -1,10 +1,33 @@
 :root {
-    --primary-color: #1eff00;
-    
+    --primary-color: #7ED957;    
 }
 
 
 
 .text-primary {
     color: var(--primary-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-input:focus {
+    border-color: var(--primary-color)!important;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(93, 162, 84, 0.25);
+}
+
+.form-control:focus {
+    background-color: var(--bs-body-bg);
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(93, 162, 84, 0.25);
 }
