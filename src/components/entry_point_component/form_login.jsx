@@ -1,12 +1,13 @@
 import { useRef } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
-import { Fade } from "react-reveal";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Fade } from "react-reveal";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchLogin } from "../../redux/userReducer";
 
 export default function FormLogin() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const email = useRef(null);
     const password = useRef(null);
@@ -18,7 +19,11 @@ export default function FormLogin() {
             password: password.current.value,
         }
 
-        dispatch(fetchLogin(loginData));
+        dispatch(fetchLogin(loginData)).then((res) => {
+            if(res.meta.requestStatus === 'fulfilled') {
+                navigate('/')
+            }
+        })
     }
 
 
