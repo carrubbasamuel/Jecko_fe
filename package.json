@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "dotenv-webpack": "^8.0.1"
   }
 }

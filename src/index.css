@@ -9,12 +9,33 @@
 }
 .logo{
   object-fit: contain;
-  transition: all 0.5s ease-in-out;
+  animation: scale-exit 1s ease-in-out;
 }
 
 .logo-singup{
+  animation: scale 1s ease-in-out;
   transform: scale(0.8);
 }
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+
+@keyframes scale-exit {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 
 
 .required-field::after{
@@ -24,4 +45,19 @@
   right: 10px;
   top: 5px;
   color: red;
+}
+
+.svg-log{
+  filter: blur(15px); 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+}
+
+.mynav{
+  height: 100%;
+  width: 50px!important;
 }

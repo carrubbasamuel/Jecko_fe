@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<LayoutEntryPoint><FormLogin /></LayoutEntryPoint>} />
           <Route path="/singup" element={<LayoutEntryPoint><FormSingup /></LayoutEntryPoint>} />
-          <Route exact path="/" element={<PROTECTED_ROUTE element={<Home />} />} />
+          <Route exact path="/home" element={<PROTECTED_ROUTE element={<Home />} />} />
         </Routes>
       </BrowserRouter>
 

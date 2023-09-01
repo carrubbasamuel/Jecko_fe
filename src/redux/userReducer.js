@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 const initialState = {
     user_token: localStorage.getItem("user") || null,
+    profile: null,
     loading: false,
     error: null,
 };
@@ -19,6 +20,7 @@ const userSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
+        //Login
         builder.addCase(fetchLogin.pending, (state, action) => {
             state.loading = true;
         });
@@ -31,6 +33,7 @@ const userSlice = createSlice({
             state.loading = false;
             state.error = action.error.message; // Messaggio di errore dal backend
         });
+        //Singup
         builder.addCase(fetchSingup.pending, (state, action) => {
             state.loading = true;
         });
@@ -42,6 +45,18 @@ const userSlice = createSlice({
             console.log(action.error)
             state.error = state.error + action.payload
         });
+        //Profile
+        builder.addCase(fetchProfile.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(fetchProfile.fulfilled, (state, action) => {
+            state.loading = false;
+            state.profile = action.payload;
+        })
+        builder.addCase(fetchProfile.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
     }
 });
 
@@ -95,6 +110,33 @@ export const fetchSingup = createAsyncThunk(
                 }
             }
         }
+);
+
+
+export const fetchProfile = createAsyncThunk(
+    "user/fetchProfile",
+    async (_, { getState}) => {
+        try {
+            const { user_token } = getState().user;
+            const response = await axios.get(process.env.REACT_APP_BACK_URL + "/profile", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: user_token,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.log(error.response)
+            if(error.response.status === 401){
+                toast.error("Unauthorized");
+                throw error;
+            }
+            error.response.data.errors.forEach((err) => {
+                toast.error(err.msg);
+                throw err;
+            });
+        }
+    }
 );
 
 

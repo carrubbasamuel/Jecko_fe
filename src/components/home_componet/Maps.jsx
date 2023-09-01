@@ -4,7 +4,7 @@ import React from 'react';
 import { MapContainer, Marker, Polygon, Popup, TileLayer } from 'react-leaflet';
 
 function Maps({ location }) {
-  
+
   const mapStyle = {
     height: '100vh',
   };
