@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 export default function PROTECTED_ROUTE({ element }) {
     const token = useSelector(state => state.user.user_token);
 
+
     if (token) {
         const { exp } = decode(token);
         const expirationTime = exp * 1000 - 60000;

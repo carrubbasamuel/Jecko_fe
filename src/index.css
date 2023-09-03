@@ -48,7 +48,7 @@
 }
 
 .svg-log{
-  filter: blur(15px); 
+  filter: blur(5px); 
   position: absolute;
   top: 0;
   left: 0;
@@ -57,7 +57,13 @@
   z-index: -1; 
 }
 
-
+.entrypoint{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
 
 
 .page-container{
@@ -77,8 +83,22 @@
   top: 0;
   height: 100%;
   width: 80px; 
+  padding: 10px;
   background-color: #fff;
   z-index: 1;
+}
+
+#menu a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px; 
+  width: 70px;
+}
+
+#menu a:hover{
+  background-color: #b4b4b470;
+  border-radius: 15px;
 }
 
 .headerlogo{
@@ -142,6 +162,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #bbe6c7;
   
 }
 
@@ -166,4 +187,35 @@
   100% {
     transform: rotate(0deg);
   }
+}
+
+
+#avatar{
+  position: relative;
+}
+
+#avatar .status{
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: green;
+  border: 2px solid #fff;
+}
+
+
+
+.logout{
+ background-color: #9595953a;
+ padding: 20px;
+ border-radius: 15px;
+ display: inline-block;
+ margin-top: 20px;  
+}
+
+.logout:hover{
+  background-color: #959595;
+  cursor: pointer;
 }

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 const initialState = {
@@ -64,7 +65,11 @@ export const fetchLogin = createAsyncThunk(
     "user/fetchLogin",
     async (data) => {
         try {
-            const response = await axios.post(process.env.REACT_APP_BACK_URL + "/login", data);
+            const response = await toast.promise(axios.post(process.env.REACT_APP_BACK_URL + "/login", data), {
+                pending: "Loading...",
+                success: "Login success",
+                error: "Login failed",
+            });
             return response.data;
         } catch (error) {
             if(error.response.status === 401 || error.response.status === 404){
@@ -84,10 +89,14 @@ export const fetchSingup = createAsyncThunk(
     "user/fetchSignup",
     async (data) => {
         try {
-            const response = await axios.post(process.env.REACT_APP_BACK_URL + "/signup", data, {
+            const response = await toast.promise(axios.post(process.env.REACT_APP_BACK_URL + "/signup", data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
+            }), {
+                pending: "Registering...",
+                success: "Signup success",
+                error: "Signup failed",
             });
             return response.data;
         } catch (error) {

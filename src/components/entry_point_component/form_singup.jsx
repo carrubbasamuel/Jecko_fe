@@ -72,7 +72,7 @@ export default function FormSingup() {
                     <div>
                         <Fade bottom cascade>
                             <FloatingLabel controlId="floatingInput" label="Phone" className="mb-3 required-field">
-                                <Form.Control ref={phone} type="text"   />
+                                <Form.Control ref={phone} pattern="[0-9]{10}" type="tel"   />
                             </FloatingLabel>
                             <FloatingLabel controlId="floatingInput" label="Birthdate" className="mb-3 required-field">
                                 <Form.Control ref={birthdate} type="date" />

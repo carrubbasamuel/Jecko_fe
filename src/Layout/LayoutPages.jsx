@@ -1,15 +1,15 @@
 
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import NavbarMenu from '../components/pages_layout_components/Navbar';
 import Footer from '../components/pages_layout_components/Footer';
+import NavbarMenu from '../components/pages_layout_components/Navbar';
 
 
 export default function LayoutPages({ children }) {
     
     return (
         <Row className='leyoutpage'>
-            <Col md={1} className="menu-container shadow">
+            <Col md={1}>
                 <NavbarMenu />
             </Col>
 

@@ -11,7 +11,7 @@ import logo from '../asset/jecko_logo.png';
 export default function LayoutEntryPoint({ children }) {
     const location = useLocation();
     return (
-        <>
+        <div className='entrypoint'>
         <div className='div-svg'>
          <Svg className='svg-log'/>
         </div>
@@ -29,7 +29,7 @@ export default function LayoutEntryPoint({ children }) {
                 </Col>
             </Row>
         </Container>
-        </>
+        </div>
         
     )
 }
