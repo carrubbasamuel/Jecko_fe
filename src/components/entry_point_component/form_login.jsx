@@ -21,7 +21,7 @@ export default function FormLogin() {
 
         dispatch(fetchLogin(loginData)).then((res) => {
             if(res.meta.requestStatus === 'fulfilled') {
-                navigate('/home')
+                navigate('/')
             }
         })
     }

@@ -5,6 +5,7 @@ import PROTECTED_ROUTE from "./Protected_Route";
 import FormLogin from "./components/entry_point_component/form_login";
 import FormSingup from "./components/entry_point_component/form_singup";
 import Home from "./pages/home";
+import Maps from "./pages/map";
 
 
 
@@ -18,7 +19,8 @@ function App() {
         <Routes>
           <Route path="/login" element={<LayoutEntryPoint><FormLogin /></LayoutEntryPoint>} />
           <Route path="/singup" element={<LayoutEntryPoint><FormSingup /></LayoutEntryPoint>} />
-          <Route exact path="/home" element={<PROTECTED_ROUTE element={<Home />} />} />
+          <Route path="/" element={<PROTECTED_ROUTE element={<Home />} />} />
+          <Route path="/map" element={<PROTECTED_ROUTE element={<Maps />} />} />
         </Routes>
       </BrowserRouter>
 

@@ -1,31 +1,21 @@
-import React, { useEffect } from 'react';
-import { Col, Image, Nav, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import logo from '../asset/jecko_logo.png';
-import { fetchProfile } from '../redux/userReducer';
+
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+import NavbarMenu from '../components/pages_layout_components/Navbar';
+import Footer from '../components/pages_layout_components/Footer';
 
 
 export default function LayoutPages({ children }) {
-    const dispatch = useDispatch()
-    const { profile } = useSelector(state => state.user)
-
-    useEffect(() => {
-        dispatch(fetchProfile())
-    }, [dispatch])
+    
     return (
-        <Row>
-            {/* Menu laterale sinistro */}
-            <Col md={1} className="d-none d-md-block bg-light sidebar">
-                <div className="position-sticky">
-                    <Nav className="flex-column">
-                        <Image width={130} src={logo} alt="logo" />
-                        <Image width={130} src={profile?.avatar} alt="logo" rounded />
-                    </Nav>
-                </div>
+        <Row className='leyoutpage'>
+            <Col md={1} className="menu-container shadow">
+                <NavbarMenu />
             </Col>
 
-            <Col md={11}>
+            <Col md={11} className='page-container'>
                 {children}
+                <Footer />
             </Col>
         </Row>
     );

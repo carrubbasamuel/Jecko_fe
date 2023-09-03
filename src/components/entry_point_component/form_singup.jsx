@@ -38,7 +38,7 @@ export default function FormSingup() {
             if(res.meta.requestStatus === 'fulfilled') {
                 dispatch(fetchLogin({email: email.current.value, password: password.current.value})).then((res) => {
                     if(res.meta.requestStatus === 'fulfilled') {
-                        navigate('/home')
+                        navigate('/')
                     }
                 })
             }
