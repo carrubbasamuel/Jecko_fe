@@ -2,23 +2,38 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import React from 'react';
 import { Circle, MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import { useSelector } from 'react-redux';
-import useGeoLocation from '../Hooks/Geeolocation_hook';
+import { useDispatch, useSelector } from 'react-redux';
+import useGeoLocation from '../Hooks/useGeolocation_hook';
 import LayoutPages from '../Layout/LayoutPages';
 import markerBasket from '../asset/marker_basket.png';
+import EventTarget from '../components/map_component/event_target';
+import { fetchEventByLocation } from '../redux/eventReducer';
+
 
 export default function Maps() {
+  const dispatch = useDispatch();
   const location = useGeoLocation();
   const fieldsLocation = useSelector(state => state.location.field);
+  
+  const handleClick = async (id) => {
+    await dispatch(fetchEventByLocation(id))
+  }
+
 
   const mapStyle = {
     height: '100vh',
   };
 
+  const maxBounds = [
+    [-90, -180], 
+    [90, 180],   
+  ];
+
+
   return (
     <LayoutPages>
     {location && 
-        <MapContainer style={mapStyle} center={[location.latitude, location.longitude]} zoom={12} scrollWheelZoom={true} >
+        <MapContainer style={mapStyle} center={[location.latitude, location.longitude]} zoom={12} scrollWheelZoom={true} maxBounds={maxBounds} minZoom={2} >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -33,12 +48,14 @@ export default function Maps() {
                 iconSize: [50, 50],
                 
               })}
+              eventHandlers={{
+                click: () => {
+                  handleClick(field._id)
+                },
+              }}
             >
               <Popup>
-                <div>
-                  <h2>{field.name}</h2>
-                  <p>Lat: {field.geo.lat}, Lon: {field.geo.lng}</p>
-                </div>
+                <EventTarget field={field}/>
               </Popup>
             </Marker>
           ))}
