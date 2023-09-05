@@ -5,6 +5,7 @@ import axios from "axios";
 
 const initialState = {
     field: [],
+    fieldSelected: null,
     loading: false,
     error: null,
 };
@@ -13,6 +14,11 @@ const initialState = {
 const mapSlice = createSlice({
     name: "map",
     initialState,
+    reducers: {
+        setFieldSelected: (state, action) => {
+            state.fieldSelected = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchLocationByCity.pending, (state, action) => {
             state.loading = true;
@@ -51,4 +57,6 @@ export const fetchLocationByCity = createAsyncThunk(
     }
 );
 
+
+export const { setFieldSelected } = mapSlice.actions;
 export default mapSlice.reducer;

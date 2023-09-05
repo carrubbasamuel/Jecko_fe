@@ -18,12 +18,17 @@ function useCountdown(endDate) {
         setCountdown('L\'evento è terminato');
       } else {
         const timeDiff = eventDate - currentDate;
-        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+        const seconds = Math.floor((timeDiff / 1000) % 60);
 
-        setCountdown(`Termina tra: ${days} giorni, ${hours} ore, ${minutes} minuti, ${seconds} secondi`);
+
+
+        const formattedHours = hours < 10 ? `0${hours}` : hours;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+        const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+        setCountdown(`${formattedHours} : ${formattedMinutes} : ${formattedSeconds}`);
       }
     }, 1000);
 

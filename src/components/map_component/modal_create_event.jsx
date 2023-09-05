@@ -1,14 +1,16 @@
-import { Modal, Form, Button } from "react-bootstrap"
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { fetchCreateEvent } from "../../redux/eventReducer";
+import { Button, Form, Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { fetchCreateEvent } from "../../redux/eventReducer";
 
 
-export default function ModalCreateEvent({showModal, setShowModal, field}){
+export default function ModalCreateEvent({showModal, setShowModal}){
     const dispatch = useDispatch();
+    const field = useSelector(state => state.location.fieldSelected);
 
     const [formData, setFormData] = useState({
+        title: '',
         dateStart: '',
         dateEnd: '',
         location: field._id,
@@ -69,6 +71,14 @@ export default function ModalCreateEvent({showModal, setShowModal, field}){
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
+                    <Form.Group controlId="title">
+                            <Form.Label>Titolo dell'evento:</Form.Label>
+                            <Form.Control
+                                name="title"
+                                value={formData.title}
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
                         <Form.Group controlId="dateStart">
                             <Form.Label>Data e ora di inizio:</Form.Label>
                             <Form.Control

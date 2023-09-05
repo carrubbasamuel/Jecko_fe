@@ -43,7 +43,7 @@ const userSlice = createSlice({
         });
         builder.addCase(fetchSingup.rejected, (state, action) => {
             state.loading = false;
-            console.log(action.error)
+
             state.error = state.error + action.payload
         });
         //Profile

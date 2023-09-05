@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import useEventCountdown from '../../Hooks/useEventCountdown_hook';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import EventAccordion from './event_accordion_list';
 import ModalCreateEvent from './modal_create_event';
 
-export default function EventTarget({ field }) {
+export default function EventTarget({ field, setShowDetails }) {
     const [showModal, setShowModal] = useState(false);
-    const event = useSelector(state => state.event.event);
 
-
-    const endDate = event && event[0] && event[0].dateEnd ? event[0].dateEnd : null;
-    const countdown = useEventCountdown(endDate);
     
 
     const handleShowModal = () => {
@@ -18,24 +14,30 @@ export default function EventTarget({ field }) {
     };
 
     return (
-        <div>
-            <h3>{field.name}</h3>
-            <hr />
-            {event && endDate ? (
-                <div>
-                    <p>{event[0].description}</p>
-                    <div>
-                        {countdown}
-                    </div>
+        <>
+            <ModalCreateEvent showModal={showModal} setShowModal={setShowModal} />
+            <aside id='field-details'>
+                <div className='text-end me-4 mt-4'>
+                    <AiFillCloseCircle onClick={() => setShowDetails(false)} size={30} />
                 </div>
-            ) : (
-                <p>Non ci sono eventi in programma</p>
-            )}
-            <Button variant="primary" onClick={handleShowModal}>
-                Crea Evento
-            </Button>
+                <div className='eventCardDetails'>
+                    <div>
+                    <h3 className='m-4'>{field.name}</h3>
 
-            <ModalCreateEvent showModal={showModal} setShowModal={setShowModal} field={field}/>
-        </div>
+                    {/* immagini qui */}
+
+                    
+                      <EventAccordion />
+                    </div>
+                    
+
+                    
+                    <Button variant='primary' className='m-3 w-75' onClick={handleShowModal}>
+                        Prenota
+                    </Button>
+                </div> 
+            </aside>
+        </>
+        
     );
 }

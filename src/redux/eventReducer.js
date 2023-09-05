@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const initialState = {
@@ -26,18 +28,19 @@ const eventSlice = createSlice({
 
 export const fetchCreateEvent = createAsyncThunk(
     'event/fetchCreateEvent',
-    async (event, {getState}) => {
-        const response = await fetch('http://localhost:3003/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: getState().user.user_token,
-                
-            },
-            body: JSON.stringify(event),
-        });
-        const data = await response.json();
-        return data;
+    async (event, { getState }) => {
+        try {
+            const response = await axios.post('http://localhost:3003/create', event, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: getState().user.user_token,
+                },
+            });
+
+            return response.data;
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
     }
 );
 

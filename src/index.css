@@ -1,3 +1,7 @@
+html{
+  overflow-x: hidden;
+}
+
 
 .div-logo{
   margin-top: 20px;
@@ -67,7 +71,8 @@
 
 
 .page-container{
-  margin-left: 80px;
+  margin-left: 90px;
+  padding: 0;
   width: 100%;
   overflow-y: auto; 
 }
@@ -218,4 +223,53 @@
 .logout:hover{
   background-color: #959595;
   cursor: pointer;
+}
+
+
+#field-details{
+  position: absolute;
+  left: 90px;
+  top: 25px;
+  width: 400px;
+  border-radius: 50px;
+  z-index: 10000;
+  height: 90%;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px 0px rgba(102, 102, 102, 0.087);
+  animation: appear 0.3s ease-in-out forwards;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+
+
+.currentEvent{
+  background-color: #bbe6c7;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.eventCardDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 90%;
+  max-height: 90%;
+  width: 100%;
 }

@@ -1,22 +1,29 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import React from 'react';
-import { Circle, MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Circle, MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
 import useGeoLocation from '../Hooks/useGeolocation_hook';
 import LayoutPages from '../Layout/LayoutPages';
 import markerBasket from '../asset/marker_basket.png';
 import EventTarget from '../components/map_component/event_target';
 import { fetchEventByLocation } from '../redux/eventReducer';
+import { setFieldSelected } from '../redux/locationReducer';
+
 
 
 export default function Maps() {
   const dispatch = useDispatch();
   const location = useGeoLocation();
   const fieldsLocation = useSelector(state => state.location.field);
+  const fieldSelected = useSelector(state => state.location.fieldSelected);
+  const [showDetails, setShowDetails] = React.useState(false);
   
-  const handleClick = async (id) => {
-    await dispatch(fetchEventByLocation(id))
+  const handleClick = async (field) => {
+    setShowDetails(false)
+    await dispatch(setFieldSelected(field))
+    await dispatch(fetchEventByLocation(field._id))
+    setShowDetails(true)
   }
 
 
@@ -32,8 +39,9 @@ export default function Maps() {
 
   return (
     <LayoutPages>
+    {showDetails && <EventTarget field={fieldSelected} setShowDetails={setShowDetails}/>}
     {location && 
-        <MapContainer style={mapStyle} center={[location.latitude, location.longitude]} zoom={12} scrollWheelZoom={true} maxBounds={maxBounds} minZoom={2} >
+        <MapContainer style={mapStyle} center={[location.latitude, location.longitude]} zoom={12} scrollWheelZoom={true} maxBounds={maxBounds} minZoom={2} zoomControl={false} >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -50,13 +58,10 @@ export default function Maps() {
               })}
               eventHandlers={{
                 click: () => {
-                  handleClick(field._id)
+                  handleClick(field)
                 },
               }}
-            >
-              <Popup>
-                <EventTarget field={field}/>
-              </Popup>
+            >  
             </Marker>
           ))}
 
