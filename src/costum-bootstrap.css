@@ -1,7 +1,6 @@
 :root {
     --primary-color: #7ED957;   
     --bs-primary-bg-subtle:var(--primary-color)!important;
-    --bs-accordion-inner-border-radius: 0;
 }
 
 

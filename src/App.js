@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import LayoutEntryPoint from "./Layout/LayoutEntryPoint";
@@ -8,6 +9,9 @@ import Home from "./pages/home";
 import Maps from "./pages/map";
 import Profile from "./pages/profile";
 
+import { useDispatch } from "react-redux";
+import { fetchOnLoadEvent } from "./redux/eventReducer";
+
 
 
 
@@ -16,6 +20,7 @@ import Profile from "./pages/profile";
 
 
 function App() {
+
   return (
     <>
       <BrowserRouter>

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { fetchCreateEvent } from "../../redux/eventReducer";
+import { fetchCreateEvent, fetchEventByLocation } from "../../redux/eventReducer";
+import { setJoinRoom } from "../../redux/socketReducer";
 
 
 export default function ModalCreateEvent({showModal, setShowModal}){
@@ -59,10 +60,13 @@ export default function ModalCreateEvent({showModal, setShowModal}){
 
 
     const handleCreateEvent = () => {
-        dispatch(fetchCreateEvent(formData));
+        dispatch(fetchCreateEvent(formData)).then((res) => {
+            dispatch(fetchEventByLocation(field._id))
+        });
         setShowModal(false);
     }
 
+    
 
     return (
         <Modal show={showModal} onHide={handleCloseModal}>

@@ -19,7 +19,7 @@ export default function LayoutEntryPoint({ children }) {
             <Row className='justify-content-center h-100 align-items-center'>
                 <Col sm={12} md={6}>
                     <div className='div-logo'>
-                        <Link to={"/"} className={`logo ${location.pathname === '/singup' ? 'logo-singup' : ''}`}>
+                        <Link to={"/login"} className={`logo ${location.pathname === '/singup' ? 'logo-singup' : ''}`}>
                             <img src={logo} alt='logo'  />
                         </Link>
                     </div>

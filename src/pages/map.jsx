@@ -1,12 +1,12 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Circle, MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
 import useGeoLocation from '../Hooks/useGeolocation_hook';
 import LayoutPages from '../Layout/LayoutPages';
 import markerBasket from '../asset/marker_basket.png';
-import EventTarget from '../components/map_component/event_target';
+import EventTarget from '../components/event_component/event_target';
 import { fetchEventByLocation } from '../redux/eventReducer';
 import { setFieldSelected } from '../redux/locationReducer';
 
@@ -25,6 +25,19 @@ export default function Maps() {
     await dispatch(fetchEventByLocation(field._id))
     setShowDetails(true)
   }
+
+  useEffect(() => {
+    let intervalId;
+    if (showDetails) {
+      intervalId = setInterval(() => {
+        dispatch(fetchEventByLocation(fieldSelected._id));
+      }, 30000);
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    }
+  }, [dispatch, showDetails, fieldSelected]);
 
 
   const mapStyle = {

@@ -124,7 +124,7 @@ export const fetchSingup = createAsyncThunk(
 
 export const fetchProfile = createAsyncThunk(
     "user/fetchProfile",
-    async (_, { getState}) => {
+    async (_, { getState, dispatch}) => {
         try {
             const { user_token } = getState().user;
             const response = await axios.get(process.env.REACT_APP_BACK_URL + "/profile", {
@@ -135,9 +135,11 @@ export const fetchProfile = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            console.log(error.response)
             if(error.response.status === 401){
                 toast.error("Unauthorized");
+                setTimeout(() => {
+                  window.location.href = "/login";
+                }, 2000);
                 throw error;
             }
             error.response.data.errors.forEach((err) => {

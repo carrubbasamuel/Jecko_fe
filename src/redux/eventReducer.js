@@ -1,10 +1,12 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { setJoinRoom } from './socketReducer';
 
 
 const initialState = {
     event: null,
+    eventPlayer: [],
 }
 
 const eventSlice = createSlice({
@@ -23,6 +25,19 @@ const eventSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
         });
+        //Event OnLoad
+        builder.addCase(fetchOnLoadEvent.pending, (state, action) => {
+            state.loading = true;
+        }
+        );
+        builder.addCase(fetchOnLoadEvent.fulfilled, (state, action) => {
+            state.loading = false;
+            state.eventPlayer = action.payload;
+        })
+        builder.addCase(fetchOnLoadEvent.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
     }
 });
 
@@ -59,6 +74,58 @@ export const fetchEventByLocation = createAsyncThunk(
         return data;
     }
 );
+
+
+export const fetchDelateEvent = createAsyncThunk(
+    'event/fetchDelateEvent',
+    async (eventId, {getState}) => {
+        const response = await fetch(`http://localhost:3003/deleteEvent/${eventId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: getState().user.user_token,
+            },
+        });
+        const data = await response.json();
+        
+        return data;
+    }
+);
+
+export const fetchJoinInEvent = createAsyncThunk(
+    'event/fetchJoinInEvent',
+    async (event, {getState}) => {
+        const response = await fetch(`http://localhost:3003/joinEvent/${event._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: getState().user.user_token,
+            },
+        });
+        const data = await response.json();
+        return data;
+    }
+);
+
+
+export const fetchOnLoadEvent = createAsyncThunk(
+    'event/fetchOnLoadEvent',
+    async (_, {getState, dispatch}) => {
+        const response = await fetch(`http://localhost:3003/onLoadEvent`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: getState().user.user_token,
+            },
+        });
+        const datas = await response.json();
+        datas.forEach(data => {
+            dispatch(setJoinRoom(data.id_room))
+        });
+        return datas;
+    }
+);
+
 
 
 

@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDelateEvent } from '../redux/eventReducer';
 
 function useCountdown(endDate) {
+  const dispatch = useDispatch();
+  const field = useSelector(state => state.location.fieldSelected);
   const [countdown, setCountdown] = useState('');
 
   useEffect(() => {
@@ -16,6 +20,7 @@ function useCountdown(endDate) {
       if (currentDate >= eventDate) {
         clearInterval(intervalId);
         setCountdown('L\'evento è terminato');
+        dispatch(fetchDelateEvent(field._id))
       } else {
         const timeDiff = eventDate - currentDate;
         const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
@@ -35,7 +40,7 @@ function useCountdown(endDate) {
     return () => {
       clearInterval(intervalId);
     };
-  }, [endDate]);
+  }, [dispatch, endDate, field._id]);
 
   return countdown;
 }

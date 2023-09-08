@@ -1,26 +1,21 @@
-import { Accordion } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import useCountdown from '../../Hooks/useEventCountdown_hook';
+import { Accordion, Button } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import EventInProgress from './event_in_progress';
+import { fetchJoinInEvent } from '../../redux/eventReducer';
+
+
 
 export default function EventAccordion() {
+    const dispatch = useDispatch();
     const events = useSelector(state => state.event.event);
-    const currentDate = new Date();
-    const currentEvent = events.find((event) => {
-        const eventDateStart = new Date(event.dateStart);
-        const eventDateEnd = new Date(event.dateEnd);
-        return currentDate >= eventDateStart && currentDate < eventDateEnd;
-    });
+
+    const handleClick = async (event) => {
+        await dispatch(fetchJoinInEvent(event))
+    };
 
     return (
         <div className='eventBox'>
-            {currentEvent && (
-                <div className='ms-3 me-3 currentEvent'>
-                    <h4>Evento in corso...</h4>
-                    <p>{currentEvent.title}</p>
-                    <p>Tempo rimanente:</p>
-                    <CountdownForEvent endDate={currentEvent.dateEnd} />
-                </div> 
-            )}
+            <EventInProgress />
             <Accordion>
                 {events.map((event, index) => (
                     <Accordion.Item key={index} eventKey={index}>
@@ -30,6 +25,7 @@ export default function EventAccordion() {
                             <p>To: {formatDate(event.dateEnd)}</p>
                             <hr />
                             <p>{event.description}</p>
+                            <Button className='mt-2' variant='primary' onClick={()=>handleClick(event)}>Join!</Button>
                         </Accordion.Body>
                     </Accordion.Item>
                 ))}
@@ -38,10 +34,7 @@ export default function EventAccordion() {
     );
 }
 
-function CountdownForEvent({ endDate }) {
-    const countdown = useCountdown(endDate);
-    return <p className='fs-3'>{countdown}</p>;
-}
+
 
 function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };

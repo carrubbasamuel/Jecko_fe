@@ -7,8 +7,6 @@ import ModalCreateEvent from './modal_create_event';
 export default function EventTarget({ field, setShowDetails }) {
     const [showModal, setShowModal] = useState(false);
 
-    
-
     const handleShowModal = () => {
         setShowModal(true);
     };
@@ -22,22 +20,18 @@ export default function EventTarget({ field, setShowDetails }) {
                 </div>
                 <div className='eventCardDetails'>
                     <div>
-                    <h3 className='m-4'>{field.name}</h3>
-
-                    {/* immagini qui */}
-
-                    
-                      <EventAccordion />
+                        <h5 className='m-4'>{field.name}</h5>
+                        {/* immagini qui */}
                     </div>
-                    
-
-                    
+                    <div className='scrollable-content'>
+                        <EventAccordion />
+                    </div>
                     <Button variant='primary' className='m-3 w-75' onClick={handleShowModal}>
                         Prenota
                     </Button>
-                </div> 
+                </div>
             </aside>
         </>
-        
     );
 }
+
