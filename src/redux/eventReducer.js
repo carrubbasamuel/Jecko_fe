@@ -43,15 +43,19 @@ const eventSlice = createSlice({
 
 export const fetchCreateEvent = createAsyncThunk(
     'event/fetchCreateEvent',
-    async (event, { getState }) => {
+    async (event, { getState, dispatch }) => {
         try {
-            const response = await axios.post('http://localhost:3003/create', event, {
+            const response = await toast.promise(axios.post('http://localhost:3003/create', event, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: getState().user.user_token,
                 },
+            }), {
+                pending: 'Loading...',
+                success: `You have created the event ${event.name}`,
+                error: 'Error',
             });
-
+            dispatch(fetchOnLoadEvent())
             return response.data;
         } catch (error) {
             toast.error(error.response.data.message)
@@ -63,15 +67,13 @@ export const fetchCreateEvent = createAsyncThunk(
 export const fetchEventByLocation = createAsyncThunk(
     'event/fetchEventByLocation',
     async (locationId, {getState}) => {
-        const response = await fetch(`http://localhost:3003/locationEvent/${locationId}`, {
-            method: 'GET',
+        const response = await axios.get(`http://localhost:3003/locationEvent/${locationId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: getState().user.user_token,
             },
         });
-        const data = await response.json();
-        return data;
+        return response.data;
     }
 );
 
@@ -79,31 +81,32 @@ export const fetchEventByLocation = createAsyncThunk(
 export const fetchDelateEvent = createAsyncThunk(
     'event/fetchDelateEvent',
     async (eventId, {getState}) => {
-        const response = await fetch(`http://localhost:3003/deleteEvent/${eventId}`, {
-            method: 'DELETE',
+        const response = await axios.delete(`http://localhost:3003/deleteEvent/${eventId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: getState().user.user_token,
             },
         });
-        const data = await response.json();
-        
-        return data;
+        return response.data;
     }
 );
 
 export const fetchJoinInEvent = createAsyncThunk(
     'event/fetchJoinInEvent',
-    async (event, {getState}) => {
-        const response = await fetch(`http://localhost:3003/joinEvent/${event._id}`, {
+    async (event, {getState, dispatch}) => {
+        const response = await toast.promise(fetch (`http://localhost:3003/joinEvent/${event._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: getState().user.user_token,
             },
+        }), {
+            pending: 'Loading...',
+            success: `You have joined the event ${event.title}`,
+            error: 'Error',
         });
-        const data = await response.json();
-        return data;
+        dispatch(fetchOnLoadEvent())
+        return response.data;
     }
 );
 
@@ -111,14 +114,13 @@ export const fetchJoinInEvent = createAsyncThunk(
 export const fetchOnLoadEvent = createAsyncThunk(
     'event/fetchOnLoadEvent',
     async (_, {getState, dispatch}) => {
-        const response = await fetch(`http://localhost:3003/onLoadEvent`, {
-            method: 'GET',
+        const response = await axios.get(`http://localhost:3003/onLoadEvent`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: getState().user.user_token,
             },
         });
-        const datas = await response.json();
+        const datas = response.data;
         datas.forEach(data => {
             dispatch(setJoinRoom(data.id_room))
         });

@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Image from 'react-bootstrap/Image';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { AiOutlineWechat } from 'react-icons/ai';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchChat } from '../../redux/chatReducer';
 import { fetchOnLoadEvent } from '../../redux/eventReducer';
 import Chat from './chat';
-import { fetchChat } from '../../redux/chatReducer';
+import './style.css';
 
-function Example() {
+
+export default function ChatList() {
   const [show, setShow] = useState(false);
   const [chatSelected, setChatSelected] = useState(null);
   const listChat = useSelector(state => state.event.eventPlayer);
@@ -20,7 +23,7 @@ function Example() {
   const handleClose = () => {
     setShow(false);
     setChatSelected(null);
-    }
+  }
   const handleShow = () => setShow(true);
 
   const handleSelectChat = (chat) => {
@@ -33,21 +36,23 @@ function Example() {
       <AiOutlineWechat onClick={handleShow} size={40} />
 
       <Offcanvas show={show} onHide={handleClose} placement='end'>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Your Chat</Offcanvas.Title>
+        <Offcanvas.Header >
+          <Offcanvas.Title>Chat for events</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body >
           {chatSelected && <Chat chat={chatSelected} close={setChatSelected} />}
           {!chatSelected && listChat && listChat.map((chat, index) => (
-            <div key={index} className='chat-item' onClick={()=>handleSelectChat(chat)}>
+            <div key={index} className='chat-item' onClick={() => handleSelectChat(chat)}>
+              <Image src={chat.location.cover} roundedCircle width={50} height={50}c className='shadow' />
+              <div className='ms-3'>
                 <p>{chat.title}</p>
-                <p>{chat.description}</p>
+                <p className='text-muted'>{chat.description}</p>
+              </div>
             </div>
-            ))}
+          ))}
         </Offcanvas.Body>
       </Offcanvas>
     </>
   );
 }
 
-export default Example;

@@ -139,7 +139,7 @@ export const fetchProfile = createAsyncThunk(
                 toast.error("Unauthorized");
                 setTimeout(() => {
                   window.location.href = "/login";
-                }, 2000);
+                }, 1000);
                 throw error;
             }
             error.response.data.errors.forEach((err) => {

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import LayoutEntryPoint from "./Layout/LayoutEntryPoint";
@@ -9,8 +8,6 @@ import Home from "./pages/home";
 import Maps from "./pages/map";
 import Profile from "./pages/profile";
 
-import { useDispatch } from "react-redux";
-import { fetchOnLoadEvent } from "./redux/eventReducer";
 
 
 
@@ -33,7 +30,16 @@ function App() {
         </Routes>
       </BrowserRouter>
 
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss={true}
+        draggable={true}
+      />
     </>
 
   );

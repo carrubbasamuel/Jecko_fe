@@ -93,7 +93,7 @@ html{
   z-index: 1;
 }
 
-#menu a{
+#menu a, #menu .chaticon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,10 +101,12 @@ html{
   width: 70px;
 }
 
-#menu a:hover{
+#menu a:hover, #menu .chaticon:hover{
   background-color: #b4b4b470;
   border-radius: 15px;
 }
+
+
 
 .headerlogo{
   margin-top: 50px;
@@ -226,133 +228,3 @@ html{
 }
 
 
-#field-details {
-  position: absolute;
-  left: 90px;
-  top: 25px;
-  width: 400px;
-  border-radius: 50px;
-  z-index: 10000;
-  height: 90%;
-  background-color: #fff;
-  box-shadow: 0px 0px 5px 0px rgba(102, 102, 102, 0.087);
-  animation: appear 0.3s ease-in-out forwards;
-}
-
-
-
-@keyframes appear {
-  0% {
-    opacity: 0;
-    transform: translateY(100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
-
-
-/* Aggiungiamo il CSS per il bottone fisso in basso */
-.scrollable-content {
-  padding-top: 5px;
-  overflow-y: auto;
-  flex-grow: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.scrollable-content::-webkit-scrollbar {
-  width: 0; /* Nascondi la barra di scorrimento orizzontale e verticale */
-  background: transparent; /* Nascondi il background della barra di scorrimento */
-}
-
-/* Facoltativamente, nascondi anche i pulsanti di scorrimento */
-.scrollable-content::-webkit-scrollbar-thumb {
-  display: none;
-}
-.currentEvent {
-  background-color: rgba(2, 57, 2, 0.826);
-  color: white;
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 10px;
-  display: flex;
-  
-  justify-content: space-around;
-  align-items: center;
-}
-
-.eventCardDetails {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 90%;
-  max-height: 90%;
-  width: 100%;
-}
-p{
-  margin: 0;
-}
-
-.eventBox{
-  width: 100%;
-}
-
-.accordion-button:focus {
-  box-shadow: none;
-}
-
-
-.offcanvas-body{
-  width: 110%;
-  padding: 0;
-}
-
-
-.chat-item{
-  border: 1px solid black;
-  padding: 10px;
-}
-
-.chat-item p:first-child{
-  font-weight: bold;
-  font-size: 22px;
-}
-.chat-item:hover{
-  background-color: #eaeaea;
-  cursor: pointer;
-}
-
-
-.sender{
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  
-}
-
-.sender input{
- width: 300px;
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  outline: none;
-}
-
-.sender button{
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  outline: none;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-.sender button:hover{
-  background-color: #eaeaea;
-}

@@ -2,33 +2,44 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import EventAccordion from './event_accordion_list';
-import ModalCreateEvent from './modal_create_event';
+import EventInProgress from './event_in_progress';
+import FormSetPrenotation from './form_create_event';
+import './style.css';
+
 
 export default function EventTarget({ field, setShowDetails }) {
-    const [showModal, setShowModal] = useState(false);
+    const [eventDate, setEventDate] = useState(false);
 
-    const handleShowModal = () => {
-        setShowModal(true);
+    const handleClose = () => {
+        setShowDetails(false);
+        setEventDate(false);
     };
+
 
     return (
         <>
-            <ModalCreateEvent showModal={showModal} setShowModal={setShowModal} />
             <aside id='field-details'>
                 <div className='text-end me-4 mt-4'>
-                    <AiFillCloseCircle onClick={() => setShowDetails(false)} size={30} />
+                    <AiFillCloseCircle onClick={handleClose} size={30} />
                 </div>
                 <div className='eventCardDetails'>
                     <div>
                         <h5 className='m-4'>{field.name}</h5>
-                        {/* immagini qui */}
                     </div>
-                    <div className='scrollable-content'>
-                        <EventAccordion />
-                    </div>
-                    <Button variant='primary' className='m-3 w-75' onClick={handleShowModal}>
-                        Prenota
-                    </Button>
+                    {eventDate && <FormSetPrenotation setEventDate={setEventDate} />}
+                    {!eventDate && <>
+                        <div className='scrollable-content'>
+                        <EventInProgress />
+                            <div className='image-cover'>
+                                <img src={field.cover} alt='image-field-cover' />
+                            </div>
+                            <EventAccordion />
+                        </div>
+                        <Button variant='primary' className='m-3 w-75' onClick={() => setEventDate(true)}>
+                            Prenota
+                        </Button>
+
+                    </>}
                 </div>
             </aside>
         </>

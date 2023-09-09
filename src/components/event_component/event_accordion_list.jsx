@@ -1,6 +1,7 @@
-import { Accordion, Button } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import EventInProgress from './event_in_progress';
+import { Accordion, Button, Image } from 'react-bootstrap';
+import { BsFillPinMapFill } from 'react-icons/bs';
+import { FaFlagCheckered } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchJoinInEvent } from '../../redux/eventReducer';
 
 
@@ -15,17 +16,28 @@ export default function EventAccordion() {
 
     return (
         <div className='eventBox'>
-            <EventInProgress />
+
             <Accordion>
                 {events.map((event, index) => (
                     <Accordion.Item key={index} eventKey={index}>
                         <Accordion.Header>{event.title}</Accordion.Header>
                         <Accordion.Body>
-                            <p>From: {formatDate(event.dateStart)}</p>
-                            <p>To: {formatDate(event.dateEnd)}</p>
+                            <div className='d-flex align-items-center justify-content-between'>
+                                <div>
+                                    <p className='d-flex align-items-center gap-2'><BsFillPinMapFill size={15} />{formatDate(event.dateStart)}</p>
+                                    <p className='d-flex align-items-center gap-2'><FaFlagCheckered size={15}/>{formatDate(event.dateEnd)}</p>
+                                </div>
+                                <div className='d-flex flex-column align-items-center'>
+                                    <Image src={event.creator.avatar} roundedCircle width={40} className='shadow' height={40} />
+                                   <p className='ms-2'>{event.creator.username}</p>
+                                </div>
+                            </div>
                             <hr />
                             <p>{event.description}</p>
-                            <Button className='mt-2' variant='primary' onClick={()=>handleClick(event)}>Join!</Button>
+                            {!event.isMine && <div className='text-end mt-3'>
+                                <Button className='mt-2' variant='primary' onClick={() => handleClick(event)}>Partecipa!</Button>
+                            </div>}
+
                         </Accordion.Body>
                     </Accordion.Item>
                 ))}
@@ -37,6 +49,7 @@ export default function EventAccordion() {
 
 
 function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    const options = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
 }
+

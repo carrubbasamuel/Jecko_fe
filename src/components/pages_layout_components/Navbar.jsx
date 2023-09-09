@@ -33,7 +33,10 @@ export default function NavbarMenu() {
       </div>
 
       <div className="d-flex justify-content-center align-items-center p-0 flex-column">
-      <ChatList />
+        <div className='chaticon'>
+          <ChatList />
+        </div>
+      
         <Link id='avatar' to={"/profile"}>
           <Image src={profile?.avatar} alt='avatar' roundedCircle width={50} height={50} />
           <div className='status'></div>
