@@ -1,17 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { setJoinRoom } from './socketReducer';
+import { notReadMessage } from './chatReducer';
+import { sendNewEvent, sendNewMessage, sendNewPlayerAddInYourEvent, setJoinRoom } from './socketReducer';
 
 
 const initialState = {
     event: null,
     eventPlayer: [],
+    showDetails: false,
 }
 
 const eventSlice = createSlice({
     name: 'event',
     initialState,
+    reducers: {
+        setShowDetails(state, action) {
+            state.showDetails = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         //Event By Location
         builder.addCase(fetchEventByLocation.pending, (state, action) => {
@@ -41,6 +48,7 @@ const eventSlice = createSlice({
     }
 });
 
+//Crea un nuovo evento
 export const fetchCreateEvent = createAsyncThunk(
     'event/fetchCreateEvent',
     async (event, { getState, dispatch }) => {
@@ -52,18 +60,19 @@ export const fetchCreateEvent = createAsyncThunk(
                 },
             }), {
                 pending: 'Loading...',
-                success: `You have created the event ${event.name}`,
-                error: 'Error',
+                success: `You have created the event "${event.title}"`,
+                error: 'Compila tutti i campi 😢',
             });
+            dispatch(sendNewEvent(event))
             dispatch(fetchOnLoadEvent())
             return response.data;
         } catch (error) {
-            toast.error(error.response.data.message)
+            return error.response
         }
     }
 );
 
-
+//Restituisce tutti gli eventi di una specifica location
 export const fetchEventByLocation = createAsyncThunk(
     'event/fetchEventByLocation',
     async (locationId, {getState}) => {
@@ -77,7 +86,7 @@ export const fetchEventByLocation = createAsyncThunk(
     }
 );
 
-
+//Elimina un evento
 export const fetchDelateEvent = createAsyncThunk(
     'event/fetchDelateEvent',
     async (eventId, {getState}) => {
@@ -91,10 +100,11 @@ export const fetchDelateEvent = createAsyncThunk(
     }
 );
 
+//Aggiunge un giocatore ad un evento
 export const fetchJoinInEvent = createAsyncThunk(
     'event/fetchJoinInEvent',
     async (event, {getState, dispatch}) => {
-        const response = await toast.promise(fetch (`http://localhost:3003/joinEvent/${event._id}`, {
+        try {const response = await toast.promise(fetch (`http://localhost:3003/joinEvent/${event._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -105,12 +115,16 @@ export const fetchJoinInEvent = createAsyncThunk(
             success: `You have joined the event ${event.title}`,
             error: 'Error',
         });
-        dispatch(fetchOnLoadEvent())
-        return response.data;
+        dispatch(sendNewPlayerAddInYourEvent(event))
+        dispatch(sendNewMessage())
+        return response.data;}
+        catch (error) {
+            toast.error(error.response.data.message)
+        }
     }
 );
 
-
+//Verifica se a quale evento è iscritto l'utente e lo collega alle rispettive socket room verificando se ci sono nuovi messaggi
 export const fetchOnLoadEvent = createAsyncThunk(
     'event/fetchOnLoadEvent',
     async (_, {getState, dispatch}) => {
@@ -124,6 +138,7 @@ export const fetchOnLoadEvent = createAsyncThunk(
         datas.forEach(data => {
             dispatch(setJoinRoom(data.id_room))
         });
+        dispatch(notReadMessage())
         return datas;
     }
 );
@@ -132,6 +147,7 @@ export const fetchOnLoadEvent = createAsyncThunk(
 
 
 
+export const { setShowDetails } = eventSlice.actions;
 export default eventSlice.reducer;
 
 

@@ -3,12 +3,32 @@ import { BsFillPinMapFill } from 'react-icons/bs';
 import { FaFlagCheckered } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchJoinInEvent } from '../../redux/eventReducer';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 
 
 export default function EventAccordion() {
     const dispatch = useDispatch();
     const events = useSelector(state => state.event.event);
+    const { socket } = useSelector(state => state.socket);
+
+    const handleRefreshPlayer = ({eventTitle, playerAdded}) => {
+        toast.success(
+            <div>
+                😁 Nuovo giocatore iscritto! <strong>{playerAdded.username}</strong> si è iscritto all'evento {eventTitle}
+            </div>
+        );
+    }
+
+    useEffect(() => {
+        socket.on('refresh-player', handleRefreshPlayer);
+
+        return () => {
+            socket.off('refresh-player', handleRefreshPlayer);
+        }
+    }, []);
+
 
     const handleClick = async (event) => {
         await dispatch(fetchJoinInEvent(event))

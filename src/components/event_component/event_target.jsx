@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
 import EventAccordion from './event_accordion_list';
 import EventInProgress from './event_in_progress';
 import FormSetPrenotation from './form_create_event';
 import './style.css';
+import { setShowDetails } from '../../redux/eventReducer';
 
 
-export default function EventTarget({ field, setShowDetails }) {
+export default function EventTarget({ field }) {
+    const dispatch = useDispatch();
     const [eventDate, setEventDate] = useState(false);
 
     const handleClose = () => {
-        setShowDetails(false);
+        dispatch(setShowDetails(false));
         setEventDate(false);
     };
+
+    
+    
 
 
     return (

@@ -1,13 +1,18 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Fade } from "react-reveal";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchLogin } from "../../redux/userReducer";
 
+
 export default function FormLogin() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        localStorage.removeItem('user');
+    }, []);
 
     const email = useRef(null);
     const password = useRef(null);

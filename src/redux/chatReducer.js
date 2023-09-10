@@ -1,11 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {toast } from 'react-toastify';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import { fetchOnLoadEvent } from "./eventReducer";
 import { sendMessage } from "./socketReducer";
 
 
 const initialState = {
     chat: [],
+    notReadMessage: [],
     loading: false,
     error: null,
 };
@@ -28,6 +30,19 @@ const chatSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
         });
+        //Message non letti
+        builder.addCase(notReadMessage.pending, (state, action) => {
+            state.loading = true;
+        }
+        );
+        builder.addCase(notReadMessage.fulfilled, (state, action) => {
+            state.loading = false;
+            state.notReadMessage = action.payload;
+        });
+        builder.addCase(notReadMessage.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
     }
 });
 
@@ -60,7 +75,6 @@ export const fetchMessage = createAsyncThunk(
                     Authorization: getState().user.user_token,
                 },
             });
-            console.log(response.data);
             dispatch(sendMessage(response.data.id_room))
             return response.data;
         } catch (error) {
@@ -68,6 +82,44 @@ export const fetchMessage = createAsyncThunk(
         }
     }
 );
+
+export const notReadMessage = createAsyncThunk(
+    'chat/notReadMessage',
+    async (_, { getState }) => {
+        try {
+            const response = await axios.get('http://localhost:3003/messageNotRead', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: getState().user.user_token,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            return error
+        }
+    }
+);
+
+
+export const fetchReadMessage = createAsyncThunk(
+    'chat/fetchReadMessage',
+    async (id_room, { getState, dispatch }) => {
+        try {
+            const response = await axios.patch(`http://localhost:3003/messageRead/${id_room}`,{}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: getState().user.user_token,
+                },
+            });
+            dispatch(fetchOnLoadEvent())
+            return response.data;
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
+);
+
+
 
 
 

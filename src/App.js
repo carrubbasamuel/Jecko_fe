@@ -7,6 +7,8 @@ import FormSingup from "./components/entry_point_component/form_singup";
 import Home from "./pages/home";
 import Maps from "./pages/map";
 import Profile from "./pages/profile";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 
 
@@ -17,7 +19,22 @@ import Profile from "./pages/profile";
 
 
 function App() {
+  const {user_token} = useSelector(state => state.user);
+  const {socket } = useSelector(state => state.socket);
 
+  useEffect(() => {
+    if(user_token){
+      socket.emit('saveTokenUser', user_token)
+    }
+
+    return () => {
+      socket.emit('delateTokenUser', user_token)
+      socket.off('saveTokenUser')
+      socket.off('delateTokenUser')
+    }
+  }, [user_token, socket])
+
+  
   return (
     <>
       <BrowserRouter>

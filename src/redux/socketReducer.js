@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import io from "socket.io-client";
 
+
 const initialState = {
-    socket: io.connect("http://localhost:3003/chat"),
+    socket: io.connect("http://localhost:3003/chat")
 };
 
 const socketSlice = createSlice({
@@ -12,14 +13,22 @@ const socketSlice = createSlice({
         setJoinRoom: (state, action) => {
             state.socket.emit('joinEventRoom', action.payload)
         },
+        sendNewEvent: (state, action) => {
+            state.socket.emit('newEvent', action.payload)
+        },
         sendMessage: (state, action)=>{
             state.socket.emit('sendMessage', action.payload)
+        },
+        sendNewMessage: (state, action)=>{
+            state.socket.emit('newMessage', action.payload)
+        },
+        sendNewPlayerAddInYourEvent: (state, action)=>{
+            state.socket.emit('newPlayerAddInYourEvent', action.payload)
         }
 
     }
 });
 
 
-
-export const {  setJoinRoom, sendMessage } = socketSlice.actions;
+export const {  setJoinRoom, sendMessage, sendNewEvent, sendNewPlayerAddInYourEvent, sendNewMessage } = socketSlice.actions;
 export default socketSlice.reducer;

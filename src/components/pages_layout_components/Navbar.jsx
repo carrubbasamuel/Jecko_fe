@@ -12,8 +12,9 @@ import ChatList from '../chat_component/chat_list';
 export default function NavbarMenu() {
   const dispatch = useDispatch()
   const { profile } = useSelector(state => state.user)
+  const {notReadMessage} = useSelector(state => state.chat)
 
-  
+
   useEffect(() => {
     dispatch(fetchProfile())
   }, [dispatch])
@@ -22,21 +23,22 @@ export default function NavbarMenu() {
   return (
     <nav id='menu' className='menu-container shadow'>
 
-      <div  className="d-flex flex-column justify-content-center align-items-center p-0 ">
+      <div className="d-flex flex-column justify-content-center align-items-center p-0 ">
         <Image width={100} height={100} src={logo} alt='logo' />
         <Link to={"/"}>
-          <AiFillHome  size={30} />
+          <AiFillHome size={30} />
         </Link>
         <Link to={"/map"}>
-          <FaMapMarked  size={30} />
+          <FaMapMarked size={30} />
         </Link>
       </div>
 
       <div className="d-flex justify-content-center align-items-center p-0 flex-column">
         <div className='chaticon'>
-          <ChatList />
+          {notReadMessage && notReadMessage.length>0 && <div id='notReadMessage' className='active'>{notReadMessage.length}</div>}
+            <ChatList />
         </div>
-      
+
         <Link id='avatar' to={"/profile"}>
           <Image src={profile?.avatar} alt='avatar' roundedCircle width={50} height={50} />
           <div className='status'></div>

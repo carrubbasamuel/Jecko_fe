@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { fetchCreateEvent, fetchEventByLocation } from "../../redux/eventReducer";
 
 
+
 export default function FormSetPrenotation({ setEventDate }) {
     const dispatch = useDispatch();
     const field = useSelector(state => state.location.fieldSelected);
@@ -55,11 +56,20 @@ export default function FormSetPrenotation({ setEventDate }) {
     };
 
 
+
     const handleCreateEvent = () => {
         dispatch(fetchCreateEvent(formData)).then((res) => {
-            dispatch(fetchEventByLocation(field._id))
+            if (res.payload.status === 400) {
+                toast.error(res.payload.data.errors[0].msg);
+                return;
+            } else if (res.payload.status === 403) {
+                toast.error(res.payload.data.message);
+                return;
+            } else {
+                dispatch(fetchEventByLocation(field._id));
+                setEventDate(false);
+            }
         });
-        setEventDate(false);
     }
 
 

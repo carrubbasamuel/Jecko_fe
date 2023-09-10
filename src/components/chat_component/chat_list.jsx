@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { AiOutlineWechat } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchChat } from '../../redux/chatReducer';
+import { fetchChat, fetchReadMessage } from '../../redux/chatReducer';
 import { fetchOnLoadEvent } from '../../redux/eventReducer';
 import Chat from './chat';
 import './style.css';
@@ -14,7 +14,17 @@ export default function ChatList() {
   const [chatSelected, setChatSelected] = useState(null);
   const listChat = useSelector(state => state.event.eventPlayer);
   const dispatch = useDispatch()
+  const { socket } = useSelector(state => state.socket);
 
+  useEffect(() => {
+    socket.on('refresh-message', async ()=>{
+      await dispatch(fetchOnLoadEvent())
+    })
+
+    return () => {
+      socket.off('refresh-message');
+    };
+  }, [dispatch, socket]);
 
   useEffect(() => {
     dispatch(fetchOnLoadEvent())
@@ -29,11 +39,12 @@ export default function ChatList() {
   const handleSelectChat = (chat) => {
     setChatSelected(chat);
     dispatch(fetchChat(chat.id_room))
+    dispatch(fetchReadMessage(chat.id_room))
   }
 
   return (
     <>
-      <AiOutlineWechat onClick={handleShow} size={40} />
+      <AiOutlineWechat onClick={handleShow} size={40} style={{cursor: 'pointer'}} />
 
       <Offcanvas show={show} onHide={handleClose} placement='end'>
         <Offcanvas.Header >
@@ -48,6 +59,7 @@ export default function ChatList() {
                 <p>{chat.title}</p>
                 <p className='text-muted'>{chat.description}</p>
               </div>
+              {chat.howChatNotRead !== 0 && <div id='notReadChat' className='active me-5'>{chat.howChatNotRead}</div>}
             </div>
           ))}
         </Offcanvas.Body>

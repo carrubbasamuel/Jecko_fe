@@ -9,6 +9,7 @@
     padding: 10px;
     display: flex;
     align-items: center;
+    position: relative;
   }
   
   .chat-item p:first-child{

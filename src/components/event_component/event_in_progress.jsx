@@ -6,7 +6,7 @@ import useCountdown from '../../Hooks/useEventCountdown_hook';
 export default function EventInProgress(){
     const events = useSelector(state => state.event.event);
     const currentDate = new Date();
-    const currentEvent = events.length > 0  && events.find((event) => {
+    const currentEvent = events && events.length > 0  && events.find((event) => {
         const eventDateStart = new Date(event.dateStart);
         const eventDateEnd = new Date(event.dateEnd);
         return currentDate >= eventDateStart && currentDate < eventDateEnd;
