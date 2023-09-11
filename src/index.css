@@ -262,3 +262,7 @@ html{
 }
 
 
+.marker-event{
+  transform: scale(2);
+}
+

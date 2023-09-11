@@ -1,19 +1,15 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Footer from '../components/pages_layout_components/Footer';
 import NavbarMenu from '../components/pages_layout_components/Navbar';
-import { fetchEventByLocation, setShowDetails } from '../redux/eventReducer';
-import { setFieldSelected } from '../redux/locationReducer';
 import useOpenFieldDetails from '../Hooks/useOpenFieldDetails';
+import useSocket from '../Hooks/useSocket';
 
 
 
 export default function LayoutPages({ children }) {
-    const { socket } = useSelector(state => state.socket);
     const {handleOpenFieldDetails} = useOpenFieldDetails();
 
     const handleRefreshEvent = ({ location, title}) => {
@@ -25,13 +21,7 @@ export default function LayoutPages({ children }) {
         );
     }
 
-    useEffect(() => {
-        socket.on('refresh-event', handleRefreshEvent);
-
-        return () => {
-            socket.off('refresh-event', handleRefreshEvent);
-        }
-    }, []);
+    useSocket('refresh-event', handleRefreshEvent)
 
     return (
         <>

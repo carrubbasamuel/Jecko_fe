@@ -7,6 +7,7 @@ import { fetchChat, fetchReadMessage } from '../../redux/chatReducer';
 import { fetchOnLoadEvent } from '../../redux/eventReducer';
 import Chat from './chat';
 import './style.css';
+import useSocket from '../../Hooks/useSocket';
 
 
 export default function ChatList() {
@@ -14,17 +15,10 @@ export default function ChatList() {
   const [chatSelected, setChatSelected] = useState(null);
   const listChat = useSelector(state => state.event.eventPlayer);
   const dispatch = useDispatch()
-  const { socket } = useSelector(state => state.socket);
 
-  useEffect(() => {
-    socket.on('refresh-message', async ()=>{
-      await dispatch(fetchOnLoadEvent())
-    })
-
-    return () => {
-      socket.off('refresh-message');
-    };
-  }, [dispatch, socket]);
+  useSocket('refresh-message', async () => {
+    await dispatch(fetchOnLoadEvent())
+  })
 
   useEffect(() => {
     dispatch(fetchOnLoadEvent())

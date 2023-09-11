@@ -5,15 +5,18 @@ import { IoChevronBack } from 'react-icons/io5';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChat, fetchMessage, fetchReadMessage } from "../../redux/chatReducer";
 import { sendNewMessage } from "../../redux/socketReducer";
+import useSocket from "../../Hooks/useSocket";
 
 
 export default function Chat({ chat, close }) {
     const dispatch = useDispatch();
     const allMessage = useSelector(state => state.chat.chat);
     const [newMessage, setNewMessage] = useState("");
-    const { socket } = useSelector(state => state.socket);
     const messageEndRef = useRef(null);
 
+    useEffect(() => {
+        scrollToBottom();
+    }, [allMessage]);
 
     const scrollToBottom = () => {
         messageEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -25,25 +28,14 @@ export default function Chat({ chat, close }) {
     };
 
 
-
-    useEffect(() => {
-        socket.on('refresh-chat', (room) => {
-            dispatch(fetchReadMessage(room))
-            dispatch(fetchChat(room));
-            dispatch(sendNewMessage())
-            scrollToBottom();
-        });
-
-        return () => {
-            socket.off('refresh-chat');
-        };
-    }, [dispatch, socket]);
-
-    useEffect(() => {
+    useSocket('refresh-chat', async (room) => {
+        await dispatch(fetchReadMessage(room))
+        await dispatch(fetchChat(room));
+        await dispatch(sendNewMessage())
         scrollToBottom();
-    }, [allMessage]);
+    })
 
- 
+    
     return (
         <div className="d-flex flex-column justify-content-start h-100">
             <div className="d-flex align-items-center justify-content-start ps-4 shadow pb-3">

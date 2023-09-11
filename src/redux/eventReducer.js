@@ -115,8 +115,9 @@ export const fetchJoinInEvent = createAsyncThunk(
             success: `You have joined the event ${event.title}`,
             error: 'Error',
         });
-        dispatch(sendNewPlayerAddInYourEvent(event))
-        dispatch(sendNewMessage())
+
+        await dispatch(sendNewPlayerAddInYourEvent(event))
+        await dispatch(sendNewMessage())
         return response.data;}
         catch (error) {
             toast.error(error.response.data.message)

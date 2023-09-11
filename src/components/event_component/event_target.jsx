@@ -19,8 +19,6 @@ export default function EventTarget({ field }) {
     };
 
     
-    
-
 
     return (
         <>

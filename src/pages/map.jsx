@@ -3,12 +3,13 @@ import 'leaflet/dist/leaflet.css';
 import React, { useEffect } from 'react';
 import { Circle, MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
-import useOpenFieldDetails from '../Hooks/useOpenFieldDetails';
 import useGeoLocation from '../Hooks/useGeolocation_hook';
+import useOpenFieldDetails from '../Hooks/useOpenFieldDetails';
 import LayoutPages from '../Layout/LayoutPages';
 import markerBasket from '../asset/marker_basket.png';
+import markerBasketEvent from '../asset/marker_basket_event.png';
 import EventTarget from '../components/event_component/event_target';
-import { fetchEventByLocation} from '../redux/eventReducer';
+import { fetchEventByLocation } from '../redux/eventReducer';
 
 
 
@@ -63,7 +64,8 @@ export default function Maps() {
               key={index}
               position={[field.geo.lat, field.geo.lng]}
               icon={L.icon({
-                iconUrl: markerBasket,
+                className: field.haveEvents ? 'marker-event' : '',
+                iconUrl: field.haveEvents ? markerBasketEvent : markerBasket,
                 iconSize: [50, 50],
 
               })}
