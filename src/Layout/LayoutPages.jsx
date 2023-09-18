@@ -20,7 +20,7 @@ export default function LayoutPages({ children }) {
         const locationName = location.name;
         toast.success(
             <div>
-                🚀 Nuovo Evento creato! <a href='#' onClick={() => handleOpenFieldDetails(location)}>{title}</a> presso {locationName}
+                🚀 Nuovo Evento creato! <strong onClick={() => handleOpenFieldDetails(location)}>{title}</strong> presso {locationName}
             </div>
         );
     }
