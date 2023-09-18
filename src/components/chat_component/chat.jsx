@@ -3,9 +3,9 @@ import { MessageList } from "react-chat-elements";
 import 'react-chat-elements/dist/main.css';
 import { IoChevronBack } from 'react-icons/io5';
 import { useDispatch, useSelector } from "react-redux";
+import useSocket from "../../Hooks/useSocket";
 import { fetchChat, fetchMessage, fetchReadMessage } from "../../redux/chatReducer";
 import { sendNewMessage } from "../../redux/socketReducer";
-import useSocket from "../../Hooks/useSocket";
 
 
 export default function Chat({ chat, close }) {
@@ -38,7 +38,7 @@ export default function Chat({ chat, close }) {
     
     return (
         <div className="d-flex flex-column justify-content-start h-100">
-            <div className="d-flex align-items-center justify-content-start ps-4 shadow pb-3">
+            <div className="d-flex align-items-center justify-content-start ps-4 shadow pb-3 mt-3">
                 <p onClick={() => close(null)}><IoChevronBack size={30} style={{ cursor: 'pointer' }} /></p>
                 <h3 className="ps-4">{chat.title}</h3>
             </div>

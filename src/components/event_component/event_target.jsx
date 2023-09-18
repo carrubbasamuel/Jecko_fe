@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Offcanvas } from 'react-bootstrap';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setShowDetails } from '../../redux/eventReducer';
 import EventAccordion from './event_accordion_list';
 import EventInProgress from './event_in_progress';
 import FormSetPrenotation from './form_create_event';
 import './style.css';
-import { setShowDetails } from '../../redux/eventReducer';
 
 
 export default function EventTarget({ field }) {
     const dispatch = useDispatch();
+    const { showDetails } = useSelector(state => state.event);
     const [eventDate, setEventDate] = useState(false);
 
     const handleClose = () => {
@@ -22,9 +23,9 @@ export default function EventTarget({ field }) {
 
     return (
         <>
-            <aside id='field-details'>
+            <Offcanvas show={showDetails} id='field-details' onHide={handleClose} placement='end'>
                 <div className='text-end me-4 mt-4'>
-                    <AiFillCloseCircle onClick={handleClose} size={30} />
+                    <AiFillCloseCircle onClick={handleClose} size={30} style={{cursor: 'pointer'}} />
                 </div>
                 <div className='eventCardDetails'>
                     <div>
@@ -40,12 +41,12 @@ export default function EventTarget({ field }) {
                             <EventAccordion />
                         </div>
                         <Button variant='primary' className='m-3 w-75' onClick={() => setEventDate(true)}>
-                            Prenota
+                            CREA UN EVENTO
                         </Button>
 
                     </>}
                 </div>
-            </aside>
+            </Offcanvas>
         </>
     );
 }

@@ -1,27 +1,22 @@
-#field-details {
-    position: absolute;
-    left: 90px;
-    top: 25px;
-    width: 400px;
-    border-radius: 50px;
-    z-index: 1000;
-    height: 90%;
-    background-color: #fff;
-    box-shadow: 0px 0px 5px 0px rgba(102, 102, 102, 0.087);
-    animation: appear 0.3s ease-in-out forwards;
+
+body{
+  padding-right: 0!important;
+}
+
+  #field-details::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
   }
+  #field-details::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  #field-details h5{
+    font-size: 26px;
+    font-weight: bold;
+    color: green;
+    padding-bottom: 5px;
   
-  
-  
-  @keyframes appear {
-    0% {
-      opacity: 0;
-      transform: translateY(100px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0px);
-    }
   }
   
   
@@ -97,15 +92,19 @@
   
   .setterEvent .form-label{
     font-weight: bold;
-    margin-bottom: 5px;
+    padding-bottom: 5px;
   }
   
   .setterEvent .form-control{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
   
   .setterEvent{
     animation: opacity 0.3s ease-in-out forwards;
+  }
+  .setterEvent label{
+    color: green;
+    
   }
   
   @keyframes opacity {

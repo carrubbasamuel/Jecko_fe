@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { notReadMessage } from './chatReducer';
+import { fetchLocationByCity } from './locationReducer';
 import { sendNewEvent, sendNewMessage, sendNewPlayerAddInYourEvent, setJoinRoom } from './socketReducer';
 
 
@@ -63,8 +64,11 @@ export const fetchCreateEvent = createAsyncThunk(
                 success: `You have created the event "${event.title}"`,
                 error: 'Compila tutti i campi 😢',
             });
-            dispatch(sendNewEvent(event))
-            dispatch(fetchOnLoadEvent())
+            if (response.status === 201) {
+                dispatch(fetchLocationByCity(getState().location.citySelected))
+                dispatch(sendNewEvent(event))
+                dispatch(fetchOnLoadEvent())
+            }
             return response.data;
         } catch (error) {
             return error.response
@@ -75,7 +79,7 @@ export const fetchCreateEvent = createAsyncThunk(
 //Restituisce tutti gli eventi di una specifica location
 export const fetchEventByLocation = createAsyncThunk(
     'event/fetchEventByLocation',
-    async (locationId, {getState}) => {
+    async (locationId, { getState }) => {
         const response = await axios.get(`http://localhost:3003/locationEvent/${locationId}`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -89,7 +93,7 @@ export const fetchEventByLocation = createAsyncThunk(
 //Elimina un evento
 export const fetchDelateEvent = createAsyncThunk(
     'event/fetchDelateEvent',
-    async (eventId, {getState}) => {
+    async (eventId, { getState }) => {
         const response = await axios.delete(`http://localhost:3003/deleteEvent/${eventId}`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -103,22 +107,24 @@ export const fetchDelateEvent = createAsyncThunk(
 //Aggiunge un giocatore ad un evento
 export const fetchJoinInEvent = createAsyncThunk(
     'event/fetchJoinInEvent',
-    async (event, {getState, dispatch}) => {
-        try {const response = await toast.promise(fetch (`http://localhost:3003/joinEvent/${event._id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: getState().user.user_token,
-            },
-        }), {
-            pending: 'Loading...',
-            success: `You have joined the event ${event.title}`,
-            error: 'Error',
-        });
+    async (event, { getState, dispatch }) => {
+        try {
+            const response = await toast.promise(fetch(`http://localhost:3003/joinEvent/${event._id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: getState().user.user_token,
+                },
+            }), {
+                pending: 'Loading...',
+                success: `You have joined the event ${event.title}`,
+                error: 'Error',
+            });
 
-        await dispatch(sendNewPlayerAddInYourEvent(event))
-        await dispatch(sendNewMessage())
-        return response.data;}
+            await dispatch(sendNewPlayerAddInYourEvent(event))
+            await dispatch(sendNewMessage())
+            return response.data;
+        }
         catch (error) {
             toast.error(error.response.data.message)
         }
@@ -128,7 +134,7 @@ export const fetchJoinInEvent = createAsyncThunk(
 //Verifica se a quale evento è iscritto l'utente e lo collega alle rispettive socket room verificando se ci sono nuovi messaggi
 export const fetchOnLoadEvent = createAsyncThunk(
     'event/fetchOnLoadEvent',
-    async (_, {getState, dispatch}) => {
+    async (_, { getState, dispatch }) => {
         const response = await axios.get(`http://localhost:3003/onLoadEvent`, {
             headers: {
                 'Content-Type': 'application/json',

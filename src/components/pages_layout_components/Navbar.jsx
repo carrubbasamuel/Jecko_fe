@@ -23,8 +23,8 @@ export default function NavbarMenu() {
   return (
     <nav id='menu' className='menu-container shadow'>
 
-      <div className="d-flex flex-column justify-content-center align-items-center p-0 ">
-        <Image width={100} height={100} src={logo} alt='logo' />
+      <div className="d-flex flex-column justify-content-center align-items-center p-0">
+        <Image width={120} height={120} src={logo} alt='logo' />
         <Link to={"/"}>
           <AiFillHome size={30} />
         </Link>

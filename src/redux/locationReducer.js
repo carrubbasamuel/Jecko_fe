@@ -4,6 +4,7 @@ import axios from "axios";
 
 
 const initialState = {
+    citySelected: null,
     field: [],
     fieldSelected: null,
     loading: false,
@@ -17,6 +18,9 @@ const mapSlice = createSlice({
     reducers: {
         setFieldSelected: (state, action) => {
             state.fieldSelected = action.payload;
+        },
+        setCitySelected: (state, action) => {
+            state.citySelected = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -36,7 +40,7 @@ const mapSlice = createSlice({
 
 export const fetchLocationByCity = createAsyncThunk(
     "map/fetchLocationByCity",
-    async (city, { getState }) => {
+    async (city, { getState, dispatch }) => {
         try {
             const userToken = getState().user.user_token; 
             const response = await axios.get(
@@ -49,6 +53,7 @@ export const fetchLocationByCity = createAsyncThunk(
                     },
                 }
             );
+            dispatch(setCitySelected(city));
             const data = response.data;
             return data;
         } catch (error) {
@@ -58,5 +63,5 @@ export const fetchLocationByCity = createAsyncThunk(
 );
 
 
-export const { setFieldSelected } = mapSlice.actions;
+export const { setFieldSelected, setCitySelected } = mapSlice.actions;
 export default mapSlice.reducer;

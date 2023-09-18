@@ -2,10 +2,10 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import Footer from '../components/pages_layout_components/Footer';
-import NavbarMenu from '../components/pages_layout_components/Navbar';
 import useOpenFieldDetails from '../Hooks/useOpenFieldDetails';
 import useSocket from '../Hooks/useSocket';
+import Footer from '../components/pages_layout_components/Footer';
+import NavbarMenu from '../components/pages_layout_components/Navbar';
 
 
 
@@ -25,8 +25,8 @@ export default function LayoutPages({ children }) {
 
     return (
         <>
-            <Row className='leyoutpage'>
-                <Col md={1}>
+            <Row>
+                <Col md={1} className='p-0'>
                     <NavbarMenu />
                 </Col>
 

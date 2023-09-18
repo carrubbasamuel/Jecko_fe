@@ -3,11 +3,11 @@ import Image from 'react-bootstrap/Image';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { AiOutlineWechat } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import useSocket from '../../Hooks/useSocket';
 import { fetchChat, fetchReadMessage } from '../../redux/chatReducer';
 import { fetchOnLoadEvent } from '../../redux/eventReducer';
 import Chat from './chat';
 import './style.css';
-import useSocket from '../../Hooks/useSocket';
 
 
 export default function ChatList() {
@@ -36,15 +36,19 @@ export default function ChatList() {
     dispatch(fetchReadMessage(chat.id_room))
   }
 
+
   return (
     <>
       <AiOutlineWechat onClick={handleShow} size={40} style={{cursor: 'pointer'}} />
 
       <Offcanvas show={show} onHide={handleClose} placement='end'>
-        <Offcanvas.Header >
-          <Offcanvas.Title>Chat for events</Offcanvas.Title>
+        <Offcanvas.Header className='chat-list-header'>
         </Offcanvas.Header>
         <Offcanvas.Body >
+          {!chatSelected && listChat && listChat.length === 0 && 
+          <div className='chatempty'>
+            Unisciti ad un evento per chattare con i partecipanti!
+          </div>}
           {chatSelected && <Chat chat={chatSelected} close={setChatSelected} />}
           {!chatSelected && listChat && listChat.map((chat, index) => (
             <div key={index} className='chat-item' onClick={() => handleSelectChat(chat)}>

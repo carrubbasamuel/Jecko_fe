@@ -1,6 +1,7 @@
 import { Accordion, Button, Image } from 'react-bootstrap';
 import { BsFillPinMapFill } from 'react-icons/bs';
 import { FaFlagCheckered } from 'react-icons/fa';
+import Lottie from 'react-lottie';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import useSocket from '../../Hooks/useSocket';
@@ -21,11 +22,25 @@ export default function EventAccordion() {
         await dispatch(fetchJoinInEvent(event))
     };
 
-    console.log(events);
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: require('./emptybasket.json'),
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
+    };
+
+
 
     return (
         <div className='eventBox'>
-
+            {events.length === 0 && 
+            <div className='empty'>
+                <p>Non ci sono eventi in questo campo.</p><p>Crea tu un evento!</p>
+                <Lottie options={defaultOptions} height={150} width={150} />
+                
+            </div>}
             <Accordion>
                 {events.map((event, index) => (
                     <Accordion.Item key={index} eventKey={index}>

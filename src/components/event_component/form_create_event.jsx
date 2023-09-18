@@ -119,12 +119,12 @@ export default function FormSetPrenotation({ setEventDate }) {
                     </Form.Group>
                 </Form>
             </div>
-            <div className="d-flex w-75 m-3 gap-2 setterEvent">
+            <div className="d-flex w-75 gap-2 ">
             <Button variant="secondary" className="w-100 d-flex align-items-center justify-content-center" onClick={() => setEventDate(false)}>
-                <MdArrowBack size={20} /> Annulla
+                <MdArrowBack size={20} /> ANNULLA
             </Button>
             <Button variant="primary" className="w-100"  onClick={handleCreateEvent}>
-                Crea Evento
+                CREA EVENTO
             </Button>
             </div>
         </>

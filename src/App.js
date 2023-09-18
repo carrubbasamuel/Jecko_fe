@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import LayoutEntryPoint from "./Layout/LayoutEntryPoint";
@@ -7,8 +9,6 @@ import FormSingup from "./components/entry_point_component/form_singup";
 import Home from "./pages/home";
 import Maps from "./pages/map";
 import Profile from "./pages/profile";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
 
 
 
@@ -48,7 +48,7 @@ function App() {
       </BrowserRouter>
 
       <ToastContainer
-        position="bottom-right"
+        position="top-left"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
