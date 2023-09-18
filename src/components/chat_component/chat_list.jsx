@@ -22,7 +22,7 @@ export default function ChatList() {
 
   useEffect(() => {
     dispatch(fetchOnLoadEvent())
-  }, [])
+  }, [dispatch])
 
   const handleClose = () => {
     setShow(false);

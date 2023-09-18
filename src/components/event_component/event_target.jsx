@@ -36,7 +36,7 @@ export default function EventTarget({ field }) {
                         <div className='scrollable-content'>
                         <EventInProgress />
                             <div className='image-cover'>
-                                <img src={field.cover} alt='image-field-cover' />
+                                <img src={field.cover} alt='fieldphoto' />
                             </div>
                             <EventAccordion />
                         </div>
