@@ -51,7 +51,7 @@ export const fetchChat = createAsyncThunk(
     'chat/fetchChat',
     async (room, { getState }) => {
         try {
-            const response = await axios.get(`http://localhost:3003/message/${room}`, {
+            const response = await axios.get(process.env.REACT_APP_BACK_URL + `/message/${room}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: getState().user.user_token,
@@ -69,7 +69,7 @@ export const fetchMessage = createAsyncThunk(
     'chat/fetchMessage',
     async (message, { getState, dispatch }) => {
         try {
-            const response = await axios.post('http://localhost:3003/message', message, {
+            const response = await axios.post(process.env.REACT_APP_BACK_URL + '/message', message, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: getState().user.user_token,
@@ -87,7 +87,7 @@ export const notReadMessage = createAsyncThunk(
     'chat/notReadMessage',
     async (_, { getState }) => {
         try {
-            const response = await axios.get('http://localhost:3003/messageNotRead', {
+            const response = await axios.get(process.env.REACT_APP_BACK_URL + '/messageNotRead', {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: getState().user.user_token,
@@ -105,7 +105,7 @@ export const fetchReadMessage = createAsyncThunk(
     'chat/fetchReadMessage',
     async (id_room, { getState, dispatch }) => {
         try {
-            const response = await axios.patch(`http://localhost:3003/messageRead/${id_room}`,{}, {
+            const response = await axios.patch(process.env.REACT_APP_BACK_URL + `/messageRead/${id_room}`,{}, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: getState().user.user_token,

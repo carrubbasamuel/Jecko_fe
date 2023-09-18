@@ -54,7 +54,7 @@ export const fetchCreateEvent = createAsyncThunk(
     'event/fetchCreateEvent',
     async (event, { getState, dispatch }) => {
         try {
-            const response = await toast.promise(axios.post('http://localhost:3003/create', event, {
+            const response = await toast.promise(axios.post(process.env.REACT_APP_BACK_URL + '/create', event, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: getState().user.user_token,
@@ -80,7 +80,7 @@ export const fetchCreateEvent = createAsyncThunk(
 export const fetchEventByLocation = createAsyncThunk(
     'event/fetchEventByLocation',
     async (locationId, { getState }) => {
-        const response = await axios.get(`http://localhost:3003/locationEvent/${locationId}`, {
+        const response = await axios.get(process.env.REACT_APP_BACK_URL + `/locationEvent/${locationId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: getState().user.user_token,
@@ -94,7 +94,7 @@ export const fetchEventByLocation = createAsyncThunk(
 export const fetchDelateEvent = createAsyncThunk(
     'event/fetchDelateEvent',
     async (eventId, { getState }) => {
-        const response = await axios.delete(`http://localhost:3003/deleteEvent/${eventId}`, {
+        const response = await axios.delete(process.env.REACT_APP_BACK_URL + `/deleteEvent/${eventId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: getState().user.user_token,
@@ -109,7 +109,7 @@ export const fetchJoinInEvent = createAsyncThunk(
     'event/fetchJoinInEvent',
     async (event, { getState, dispatch }) => {
         try {
-            const response = await toast.promise(fetch(`http://localhost:3003/joinEvent/${event._id}`, {
+            const response = await toast.promise(fetch(process.env.REACT_APP_BACK_URL + `/joinEvent/${event._id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,8 +121,9 @@ export const fetchJoinInEvent = createAsyncThunk(
                 error: 'Error',
             });
 
-            await dispatch(sendNewPlayerAddInYourEvent(event))
-            await dispatch(sendNewMessage())
+            dispatch(sendNewPlayerAddInYourEvent(event))
+            dispatch(fetchLocationByCity(getState().location.citySelected))
+             dispatch(sendNewMessage())
             return response.data;
         }
         catch (error) {
@@ -135,7 +136,7 @@ export const fetchJoinInEvent = createAsyncThunk(
 export const fetchOnLoadEvent = createAsyncThunk(
     'event/fetchOnLoadEvent',
     async (_, { getState, dispatch }) => {
-        const response = await axios.get(`http://localhost:3003/onLoadEvent`, {
+        const response = await axios.get(process.env.REACT_APP_BACK_URL + `/onLoadEvent`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: getState().user.user_token,

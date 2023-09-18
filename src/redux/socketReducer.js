@@ -3,7 +3,7 @@ import io from "socket.io-client";
 
 
 const initialState = {
-    socket: io.connect("http://localhost:3003/chat")
+    socket: io.connect(process.env.REACT_APP_BACK_URL + "/chat")
 };
 
 const socketSlice = createSlice({

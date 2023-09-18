@@ -6,13 +6,17 @@ import useOpenFieldDetails from '../Hooks/useOpenFieldDetails';
 import useSocket from '../Hooks/useSocket';
 import Footer from '../components/pages_layout_components/Footer';
 import NavbarMenu from '../components/pages_layout_components/Navbar';
+import { fetchLocationByCity } from '../redux/locationReducer';
+import { useDispatch } from 'react-redux';
 
 
 
 export default function LayoutPages({ children }) {
+    const dispatch = useDispatch();
     const {handleOpenFieldDetails} = useOpenFieldDetails();
 
-    const handleRefreshEvent = ({ location, title}) => {
+    const handleRefreshEvent = async ({ location, title}) => {
+        await dispatch(fetchLocationByCity(location.city));
         const locationName = location.name;
         toast.success(
             <div>

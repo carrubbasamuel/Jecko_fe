@@ -260,7 +260,10 @@ html{
   border: 2px solid #fff;
 }
 
-
+#menu a:hover, #menu .chaticon:hover{
+  background-color: #b4b4b470;
+  border-radius: 50%;
+}
 
 .logout{
  background-color: #9595953a;
@@ -326,7 +329,10 @@ html{
   }
 
   
-
+  #menu a, #menu .chaticon {
+    height: 60px;
+    width: 60px;
+  }
   .menu-container div:first-child img {
     display: none;
   }
