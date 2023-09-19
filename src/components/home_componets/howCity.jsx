@@ -8,7 +8,7 @@ export default function HowCity() {
     return (
         <div id='howCity'>
         <h2>Dove puoi trovarci? 🗺️</h2>
-        <p>Al momento ci troviamo solo in alcune delle piu grandi città italiane ma siamo una realtà in continua espansione...</p>
+        <p className='fs-5'>Al momento ci troviamo solo in alcune delle piu grandi città italiane ma siamo una realtà in continua espansione...</p>
         <div className="container-city">
             <div className="city">
                 <h4>Roma</h4>

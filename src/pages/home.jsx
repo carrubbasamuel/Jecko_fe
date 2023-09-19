@@ -22,7 +22,7 @@ export default function Home() {
                     Benvenuti su Jecko 🦎, la tua piattaforma per mettere in contatto gli amanti dello sport in cerca di partite emozionanti nei campetti pubblici della tua città! 
                 </p>
                 <CarouselOfJecko />
-                <p className='main-text'>Con Jecko, non dovrai più preoccuparti di organizzare partite con gli amici o di cercare compagni di gioco. Siamo qui per semplificarti la vita e rendere l'organizzazione delle tue partite più facile che mai.<br/>🫵</p>
+                <p className='main-text mb-4'>Con Jecko, non dovrai più preoccuparti di organizzare partite con gli amici o di cercare compagni di gioco. Siamo qui per semplificarti la vita e rendere l'organizzazione delle tue partite più facile che mai.<br/>🫵</p>
                 
                 <HowCity />
                 

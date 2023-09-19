@@ -7,7 +7,7 @@ import { Col, Row } from 'react-bootstrap';
 export default function ProOfJecko() {
     return (
         <>
-            <p className='main-text fs-2 mt-5'>
+            <p className='main-text fs-2 mt-5 text-nowrap fs-5'>
                 Ecco cosa rende Jecko unica 😁!
             </p>
 
