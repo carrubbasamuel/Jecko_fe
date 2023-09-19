@@ -38,7 +38,7 @@ export default function CarouselOfJecko() {
   return (
     <div id='carousel' className='container-carousel mt-5 mb-4'>
       <div className='carousel-container'>
-        <ul ref={carouselRef} className='carouselJecko' style={{ transform: `translateX(${-scrollPosition}px)` }}>
+        <ul ref={carouselRef} className='carouselJecko' style={{ transform: `translateX(${-scrollPosition}px)`, animationFillMode: 'forwards' }}>
           {carouselJSON.map((item, index) => (
             <li key={index} className='itemCarousel' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
               <img src={item.image} alt={item.title} />

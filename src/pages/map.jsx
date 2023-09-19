@@ -54,7 +54,7 @@ export default function Maps() {
 
   return (
     <LayoutPages>
-      {location === null && <DaniedGeolocation />}
+      {location === null && isLoading===false && <DaniedGeolocation />}
        {isLoading && location !== null && <div className="loading-indicator">
         <GridLoader  color={"green"} loading={isLoading} size={20} />
         </div>}
