@@ -1,19 +1,35 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useOpenFieldDetails from '../Hooks/useOpenFieldDetails';
 import useSocket from '../Hooks/useSocket';
+import Logo from '../asset/jecko_logo.png';
 import Footer from '../components/pages_layout_components/Footer';
 import NavbarMenu from '../components/pages_layout_components/Navbar';
 import { fetchLocationByCity } from '../redux/locationReducer';
-import { useDispatch } from 'react-redux';
 
 
 
 export default function LayoutPages({ children }) {
     const dispatch = useDispatch();
     const {handleOpenFieldDetails} = useOpenFieldDetails();
+    const [isMobile, setIsMobile] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        handleResize(); 
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
 
     const handleRefreshEvent = async ({ location, title}) => {
         await dispatch(fetchLocationByCity(location.city));
@@ -30,13 +46,11 @@ export default function LayoutPages({ children }) {
     return (
         <>
             <Row>
-                <Col md={1} className='p-0'>
-                    <NavbarMenu />
-                </Col>
-
-                <Col md={11} className='page-container'>
+                {isMobile && <div className='header-mobile'><img src={Logo} alt='logo' height={70} width={70} /></div>}
+                <NavbarMenu />
+                <Col className='page-container'>
                     {children}
-                    <Footer />
+                    {location.pathname !== '/map' && <Footer />}
                 </Col>
             </Row>
         </>

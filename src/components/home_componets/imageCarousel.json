@@ -1,0 +1,29 @@
+[
+    {
+        "id": "1",
+        "image": "https://res.cloudinary.com/dpp3bkmvn/image/upload/v1695141250/imagecarousel/carousel1_gzudl7.jpg"
+    },
+    {
+        "id": "2",
+        "image": "https://res.cloudinary.com/dpp3bkmvn/image/upload/v1695141247/imagecarousel/carousel2_ssqqi1.jpg"
+    },
+    {
+        "id": "3",
+        "image": "https://res.cloudinary.com/dpp3bkmvn/image/upload/v1695141244/imagecarousel/carousel3_x9epmm.jpg"
+    }
+    ,
+    {
+        "id": "4",
+        "image": "https://res.cloudinary.com/dpp3bkmvn/image/upload/v1695141238/imagecarousel/carousel4_huz2sz.jpg"
+    }
+    ,
+    {
+        "id": "5",
+        "image": "https://res.cloudinary.com/dpp3bkmvn/image/upload/v1695141235/imagecarousel/carousel5_zmoqum.jpg"
+    }
+    ,
+    {
+        "id": "6",
+        "image": "https://res.cloudinary.com/dpp3bkmvn/image/upload/v1695141232/imagecarousel/carousel6_r5nrxy.jpg"
+    }
+]

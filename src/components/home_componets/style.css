@@ -1,0 +1,175 @@
+
+
+/*--------- Carousel ----------*/
+.container-carousel{
+    overflow-x: scroll!important;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.container-carousel::-webkit-scrollbar{
+    height: 10px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.carouselJecko{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    padding: 30px 20px;
+    gap: 100px;
+    list-style: none;
+}
+
+.itemCarousel{
+    min-width: 300px;
+    min-height: 300px;
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.itemCarousel:nth-child(even){
+    transform: rotate(5deg);
+}
+
+.itemCarousel:nth-child(odd){
+    transform: rotate(-5deg);
+}
+
+.itemCarousel:hover{
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+.itemCarousel img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+/*--------- Carousel Responsive ----------*/
+
+@media screen and (max-width: 768px){
+    .carouselJecko{
+        gap: 50px;
+    }
+    .itemCarousel{
+        min-width: 200px;
+        min-height: 200px;
+        width: 100px;
+        height: 100px;
+
+    }
+}
+
+/*---------How City ----------*/
+
+.container-city{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    width: 100%;
+    padding: 50px 0;
+}
+
+.city{
+    width: 250px;
+    height: 250px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(128, 128, 128, 0.242);
+    overflow: hidden;
+}
+
+.city:hover{
+    transform: scale(1.05);
+    transition: all 0.3s  ease-in;
+}
+
+.city img{
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+}
+
+#howCity{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#howCity h2{
+    margin-bottom: 20px;
+}
+#howCity p{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+/*---------How City Responsive ----------*/
+
+@media screen and (max-width: 768px){
+    .container-city{
+        flex-direction: column;
+        gap: 50px;
+    }
+    .city{
+        width: 200px;
+        height: 200px;
+    }
+    #howCity{
+        margin-top: 0;
+    }
+}
+
+/*--------- Pro Of Jecko ----------*/
+
+.main-text {
+    font-size: 1.4rem;
+    color: #555;
+    text-align: center;
+    width: 800px;
+  }
+  
+  
+  .point-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+  }
+
+  .list-item {
+    position: relative;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    padding: 20px;
+    height: 300px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #bbe6c7;
+  }
+
+  .list-item.special{
+    background-color: rgba(77, 214, 77, 0.657);
+  }
+  
+  
+  

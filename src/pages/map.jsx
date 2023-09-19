@@ -12,6 +12,7 @@ import LayoutPages from '../Layout/LayoutPages';
 import markerBasket from '../asset/marker_basket.png';
 import markerBasketEvent from '../asset/marker_basket_event.png';
 import EventTarget from '../components/event_component/event_target';
+import DaniedGeolocation from '../components/map_component/danied_geo';
 import { fetchEventByLocation } from '../redux/eventReducer';
 
 export default function Maps() {
@@ -53,7 +54,8 @@ export default function Maps() {
 
   return (
     <LayoutPages>
-       {isLoading && <div className="loading-indicator">
+      {location === null && <DaniedGeolocation />}
+       {isLoading && location !== null && <div className="loading-indicator">
         <GridLoader  color={"green"} loading={isLoading} size={20} />
         </div>}
 

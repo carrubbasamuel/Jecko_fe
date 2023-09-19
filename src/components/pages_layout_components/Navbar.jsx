@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../asset/jecko_logo.png';
 import { fetchProfile } from '../../redux/userReducer';
 import ChatList from '../chat_component/chat_list';
+import './style.css';
 
 
 export default function NavbarMenu() {
@@ -21,7 +22,7 @@ export default function NavbarMenu() {
 
 
   return (
-    <nav id='menu' className='menu-container shadow'>
+    <nav id='menu' className='shadow menu-container '>
 
       <div className="d-flex flex-column justify-content-center align-items-center p-0">
         <Image width={120} height={120} src={logo} alt='logo' />
