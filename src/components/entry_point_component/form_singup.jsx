@@ -2,8 +2,9 @@ import React, { useRef } from 'react';
 import { Button, FloatingLabel, Form, FormGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Fade } from 'react-reveal';
-import {  fetchLogin, fetchSingup } from '../../redux/userReducer';
 import { useNavigate } from 'react-router-dom';
+import { fetchLogin, fetchSingup } from '../../redux/userReducer';
+import ImageUploader from './avatar';
 
 
 
@@ -18,7 +19,7 @@ export default function FormSingup() {
     const surname = useRef(null);
     const phone = useRef(null);
     const birthdate = useRef(null);
-    const avatar = useRef(null);
+    const avatarRef = useRef(null);
     const motto = useRef(null);
 
     const handleSubmit = (e) => {
@@ -31,13 +32,14 @@ export default function FormSingup() {
         formData.append('surname', surname.current.value);
         formData.append('phone', phone.current.value);
         formData.append('birthdate', birthdate.current.value);
-        formData.append('avatar', avatar.current.files[0]);
+        formData.append('avatar', avatarRef.current.files[0]);
         formData.append('motto', motto.current.value);
 
+
         dispatch(fetchSingup(formData)).then((res) => {
-            if(res.meta.requestStatus === 'fulfilled') {
-                dispatch(fetchLogin({email: email.current.value, password: password.current.value})).then((res) => {
-                    if(res.meta.requestStatus === 'fulfilled') {
+            if (res.meta.requestStatus === 'fulfilled') {
+                dispatch(fetchLogin({ email: email.current.value, password: password.current.value })).then((res) => {
+                    if (res.meta.requestStatus === 'fulfilled') {
                         navigate('/')
                     }
                 })
@@ -46,51 +48,54 @@ export default function FormSingup() {
     }
 
 
+
     return (
         <Form onSubmit={handleSubmit} className="d-flex flex-column">
-            
-                <div className='d-flex justify-content-center flex-md-row flex-column gap-5 '>
-                    <div className='flex-grow-1'>
-                        <Fade bottom cascade>
-                            <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3 required-field"  >
-                                <Form.Control ref={email} type="email" placeholder='Email address'  />
-                            </FloatingLabel>
-                            <FloatingLabel controlId="floatingInput" label="Password" className="mb-3 required-field">
-                                <Form.Control ref={password} type="password" placeholder='Password' />
-                            </FloatingLabel>
-                            <FloatingLabel controlId="floatingInput" label="Username" className="mb-3 required-field">
-                                <Form.Control ref={username} type="text" placeholder='Username'  />
-                            </FloatingLabel>
-                            <FloatingLabel controlId="floatingInput" label="Name" className="mb-3 required-field">
-                                <Form.Control ref={name} type="text" placeholder='Name' />
-                            </FloatingLabel>
-                            <FloatingLabel controlId="floatingInput" label="Surname" className="mb-3 required-field">
-                                <Form.Control ref={surname} type="text" placeholder='Surname'  />
-                            </FloatingLabel>
-                        </Fade>
-                    </div>
-                    <div>
-                        <Fade bottom cascade>
-                            <FloatingLabel controlId="floatingInput" label="Phone" className="mb-3 required-field">
-                                <Form.Control ref={phone} pattern="[0-9]{10}" type="tel"   />
-                            </FloatingLabel>
-                            <FloatingLabel controlId="floatingInput" label="Birthdate" className="mb-3 required-field">
-                                <Form.Control ref={birthdate} type="date" />
-                            </FloatingLabel>
-                            <FormGroup controlId="floatingInput" label="Avatar" className="mb-3">
-                                <Form.Label>Avatar</Form.Label>
-                                <Form.Control ref={avatar} type="file" />
-                            </FormGroup>
-                            <FloatingLabel controlId="floatingInput" label="Motto" className="mb-3">
-                            <Form.Control ref={motto} as="textarea"/>
-                            </FloatingLabel>
-                            <div className="d-flex align-items-center mt-4 justify-content-end ">
-                    <Button type="submit" className="btn-primary me-3">Join Whith Us!</Button>
+            <Fade bottom cascade>
+                <FormGroup controlId="floatingInput" label="Imagine di profilo" className="mb-5 d-flex justify-content-center">
+                    <ImageUploader inputRef={avatarRef} />
+                </FormGroup>
+            </Fade>
+            <div className='d-flex justify-content-center flex-md-row flex-column gap-md-5 mb-5 '>
+                <div >
+                    <Fade bottom cascade>
+
+                        <FloatingLabel controlId="floatingInput" label="Email" className="mb-3 required-field"  >
+                            <Form.Control ref={email} type="email" placeholder='Email' />
+                        </FloatingLabel>
+                        <FloatingLabel controlId="floatingInput" label="Password" className="mb-3 required-field">
+                            <Form.Control ref={password} type="password" placeholder='Password' />
+                        </FloatingLabel>
+                        <FloatingLabel controlId="floatingInput" label="Nome" className="mb-3 required-field">
+                            <Form.Control ref={name} type="text" placeholder='Nome' />
+                        </FloatingLabel>
+                        <FloatingLabel controlId="floatingInput" label="Cognome" className="mb-3 required-field">
+                            <Form.Control ref={surname} type="text" placeholder='Cognome' />
+                        </FloatingLabel>
+                    </Fade>
                 </div>
-                        </Fade>
-                    </div>
+                <div>
+                    <Fade bottom cascade>
+                        <FloatingLabel controlId="floatingInput" label="Username" className="mb-3 required-field">
+                            <Form.Control ref={username} type="text" placeholder='Username' />
+                        </FloatingLabel>
+                        <FloatingLabel controlId="floatingInput" label="Telefono" className="mb-3 required-field">
+                            <Form.Control ref={phone} pattern="[0-9]{10}" type="phone" />
+                        </FloatingLabel>
+                        <FloatingLabel controlId="floatingInput" label="Data di nascita" className="mb-3 required-field">
+                            <Form.Control ref={birthdate} type="date" />
+                        </FloatingLabel>
+
+                        <FloatingLabel controlId="floatingInput" label="Motto" className="mb-3">
+                            <Form.Control ref={motto} as="textarea" />
+                        </FloatingLabel>
+                        <div className="d-flex align-items-center mt-4 justify-content-end ">
+                            <Button type="submit" className="btn-primary me-3">Join Whith Us!</Button>
+                        </div>
+                    </Fade>
                 </div>
-                
+            </div>
+
         </Form>
 
     )

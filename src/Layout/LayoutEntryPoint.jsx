@@ -12,10 +12,9 @@ export default function LayoutEntryPoint({ children }) {
     const location = useLocation();
     return (
         <div className='entrypoint'>
-        <div className='div-svg'>
          <Svg className='svg-log'/>
-        </div>
-        <Container>
+
+        <Container id='entrypage'>
             <Row className='justify-content-center h-100 align-items-center'>
                 <Col sm={12} md={6}>
                     <div className='div-logo'>

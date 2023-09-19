@@ -5,6 +5,45 @@ html{
 }
 
 
+#entrypage{
+  height: 100vh;
+  overflow: scroll;
+}
+
+.avatar-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: #96e674 2px solid;
+}
+
+.upload-button {
+  position: absolute;
+  bottom: 0;
+  right: -5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #878787;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  color: #ffffff;
+}
+
+.avatarinput{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
+}
+
+
+
 .div-logo{
   margin-top: 20px;
   display: flex;
@@ -73,10 +112,10 @@ html{
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
-  object-fit: cover;
+  overflow: hidden;
 }
 
 .entrypoint{
@@ -99,6 +138,7 @@ html{
   padding: 0;
   background-color: #fff;
   z-index: 1;
+  
 }
 
 
@@ -311,6 +351,10 @@ html{
     margin: 10px;
   }
  
+  .svg-log{
+    display: none;
+  }
+
 
   .menu-container {
     height: auto;
