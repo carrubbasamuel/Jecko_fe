@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDelateEvent } from '../redux/eventReducer';
+import { fetchDelateEvent, fetchEventByLocation } from '../redux/eventReducer';
+import { fetchLocationByCity } from '../redux/locationReducer';
 
 function useCountdown(endDate) {
   const dispatch = useDispatch();
@@ -20,7 +21,11 @@ function useCountdown(endDate) {
       if (currentDate >= eventDate) {
         clearInterval(intervalId);
         setCountdown('L\'evento è terminato');
-        dispatch(fetchDelateEvent(field._id))
+        setTimeout(() => {
+          dispatch(fetchDelateEvent(field._id))
+          dispatch(fetchEventByLocation(field._id))
+          dispatch(fetchLocationByCity(field.city))
+        }, 3000);
       } else {
         const timeDiff = eventDate - currentDate;
         const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);

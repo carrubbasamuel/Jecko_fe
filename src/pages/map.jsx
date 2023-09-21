@@ -54,13 +54,13 @@ export default function Maps() {
 
   return (
     <LayoutPages>
-      {location === null && isLoading===false && <DaniedGeolocation />}
-       {isLoading && location !== null && <div className="loading-indicator">
+      {location === 401 && <DaniedGeolocation />}
+       {isLoading && <div className="loading-indicator">
         <GridLoader  color={"green"} loading={isLoading} size={20} />
         </div>}
 
       {showDetails && <EventTarget field={fieldSelected} />}
-      {location && isLoading === false &&
+      {location && isLoading === false && location !== 401 &&
         <MapContainer style={mapStyle} center={[location.latitude, location.longitude]} attributionControl={false} zoom={12} scrollWheelZoom={true} maxBounds={maxBounds} minZoom={2} zoomControl={false} >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

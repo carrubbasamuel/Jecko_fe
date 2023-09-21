@@ -34,7 +34,7 @@ function useGeoLocation(enableHighAccuracy = true) {
                 (error) => {
                     if (error.code === error.PERMISSION_DENIED) {
                         console.error('User denied the request for Geolocation.');
-                        return setLocation(null);
+                        return setLocation(401);
                     }
                 },
                 {
