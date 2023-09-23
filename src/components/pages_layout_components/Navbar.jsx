@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
+
 import Image from 'react-bootstrap/Image';
 import { AiFillHome } from 'react-icons/ai';
 import { FaMapMarked } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import logo from '../../asset/jecko_logo.png';
-import { fetchProfile } from '../../redux/userReducer';
 import ChatList from '../chat_component/chat_list';
 import './style.css';
 
