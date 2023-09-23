@@ -1,6 +1,7 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { Circle, MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -23,6 +24,7 @@ export default function Maps() {
   const { showDetails } = useSelector(state => state.event);
   const { handleOpenFieldDetails } = useOpenFieldDetails();
   const [isLoading, setIsLoading] = useState(true);
+  const mapRef = React.useRef();
 
   useEffect(() => {
     let intervalId;
@@ -36,6 +38,14 @@ export default function Maps() {
       clearInterval(intervalId);
     }
   }, [dispatch, showDetails, fieldSelected]);
+
+  const handleCenterMap = (cityName) => {
+    if (mapRef.current) {
+      const find = location.cityCoords.find(city => city.city === cityName);
+      const { latitude, longitude } = find;
+      mapRef.current.setView([latitude, longitude], 12);
+    }
+  };
 
   useEffect(() => {
     if (location) {
@@ -52,46 +62,71 @@ export default function Maps() {
     [90, 180],
   ];
 
+
+
+
   return (
     <LayoutPages>
+
       {location === 401 && <DaniedGeolocation />}
-       {isLoading && <div className="loading-indicator">
-        <GridLoader  color={"green"} loading={isLoading} size={20} />
-        </div>}
+      {isLoading && <div className="loading-indicator">
+        <GridLoader color={"green"} loading={isLoading} size={20} />
+      </div>}
 
       {showDetails && <EventTarget field={fieldSelected} />}
       {location && isLoading === false && location !== 401 &&
-        <MapContainer style={mapStyle} center={[location.latitude, location.longitude]} attributionControl={false} zoom={12} scrollWheelZoom={true} maxBounds={maxBounds} minZoom={2} zoomControl={false} >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+        <>
+          <div className='centermap'>
+            <Button variant='primary' onClick={() => handleCenterMap('Firenze')}>Firenze</Button>
+            <Button variant='primary' onClick={() => handleCenterMap('Milano')}>Milano</Button>
+            <Button variant='primary' onClick={() => handleCenterMap('Roma')}>Roma</Button>
+          </div>
 
-          {fieldsLocation && fieldsLocation.map((field, index) => (
-            <Marker
-              key={index}
-              position={[field.geo.lat, field.geo.lng]}
-              icon={L.icon({
-                className: field.haveEvents ? 'marker-event' : '',
-                iconUrl: field.haveEvents ? markerBasketEvent : markerBasket,
-                iconSize: [50, 50],
+          <MapContainer ref={mapRef} style={mapStyle} center={[location.userCoords.latitude, location.userCoords.longitude]} attributionControl={false} zoom={12} scrollWheelZoom={true} maxBounds={maxBounds} minZoom={2} zoomControl={false} >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
 
-              })}
-              eventHandlers={{
-                click: () => {
-                  handleOpenFieldDetails(field)
-                },
-              }}
-            >
+            <Marker position={[location.userCoords.latitude, location.userCoords.longitude]} 
+            icon={L.icon({
+              iconUrl: require('./user.png'),
+              iconSize: [30, 30],
+            })}
+             >
+              
             </Marker>
-          ))}
+            {fieldsLocation && fieldsLocation.map((field, index) => (
+              <Marker
+                key={index}
+                position={[field.geo.lat, field.geo.lng]}
+                icon={L.icon({
+                  className: field.haveEvents ? 'marker-event' : '',
+                  iconUrl: field.haveEvents ? markerBasketEvent : markerBasket,
+                  iconSize: [50, 50],
 
-          {fieldsLocation.length > 0 && <Circle
-            center={[location.latitude, location.longitude]}
-            radius={9000}
-            pathOptions={{ color: 'green' }}
-          />}
-        </MapContainer>
+                })}
+                eventHandlers={{
+                  click: () => {
+                    handleOpenFieldDetails(field)
+                  },
+                }}
+              >
+              </Marker>
+            ))}
+
+            {location && location !== 401 && location.cityCoords.map((city, index) => (
+              <Circle
+                key={index}
+                center={[city.latitude, city.longitude]}
+                pathOptions={{ color: 'green' }}
+                radius={10000}
+              />
+            ))}
+
+          </MapContainer>
+        </>
+
       }
     </LayoutPages>
   );

@@ -16,6 +16,9 @@ const chatSlice = createSlice({
     name: "chat",
     initialState,
     reducers: {
+        setChat: (state, action) => {
+            state.chat = action.payload;
+        }
     },
     extraReducers: (builder) => {
         //Chat
@@ -121,6 +124,6 @@ export const fetchReadMessage = createAsyncThunk(
 
 
 
-
+export const { setChat } = chatSlice.actions;
 
 export default chatSlice.reducer;

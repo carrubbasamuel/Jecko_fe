@@ -1,0 +1,38 @@
+
+
+#medal .col-md-2, #medal .col-sm-6{
+    position: relative;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+#medal img{
+    transition: all 0.3s ease-in-out;
+}
+#medal img:hover:not(.unlocked){
+    transform: scale(1.1);
+}
+
+
+#medal{
+    margin-top: 20px;
+    
+}
+
+#medal .unlocked{
+    filter: blur(10px);
+}
+
+.custom-tooltip {
+    position: absolute;
+    background-color: #b3b3b3;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    bottom: -5px;
+    z-index: 9999;
+  }
+  

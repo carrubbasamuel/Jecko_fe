@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useSocket from "../../Hooks/useSocket";
 import { fetchChat, fetchMessage, fetchReadMessage } from "../../redux/chatReducer";
 import { sendNewMessage } from "../../redux/socketReducer";
+import { setChat } from "../../redux/chatReducer";
 
 
 export default function Chat({ chat, close }) {
@@ -35,11 +36,16 @@ export default function Chat({ chat, close }) {
         scrollToBottom();
     })
 
+    const handleClose = () => {
+        dispatch(setChat([]))
+        close(null);
+    }
+
     
     return (
         <div className="d-flex flex-column justify-content-start h-100">
-            <div className="d-flex align-items-center justify-content-start ps-4 shadow pb-3 mt-3">
-                <p onClick={() => close(null)}><IoChevronBack size={30} style={{ cursor: 'pointer' }} /></p>
+            <div className="d-flex align-items-center justify-content-start ps-4 shadow pb-3 pt-3">
+                <p onClick={handleClose}><IoChevronBack size={30} style={{ cursor: 'pointer' }} /></p>
                 <h3 className="ps-4">{chat.title}</h3>
             </div>
             <div id="message-list" className="p-2">

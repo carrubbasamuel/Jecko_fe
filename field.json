@@ -1,0 +1,416 @@
+[
+    {
+        "geo": {
+            "lat": 45.49944169625982, 
+            "lng": 9.201455719277048
+        },
+        "name": "Campetto da basket - Sammartini,（Ikun)",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat":45.511841781251675,  
+            "lng": 9.246199385417938
+        },
+        "name": "Campetto da Basket - Calabria",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.52635871086398, 
+            "lng": 9.219469056887348
+        },
+        "name": "Campetto di pallacanestro Giacometti",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.52061574866795,  
+            "lng": 9.205688330555144
+        },
+        "name": "Campetto da basket - Sarca/Smith",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.502695542389574,  
+            "lng": 9.147188588689852
+        },
+        "name": "Campo da pallacanestro",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.46524265896483, 
+            "lng": 9.20746513044599
+        },
+        "name": "Campetto da basket - Lazio",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.432844205143695,  
+            "lng": 9.25672809833168
+        },
+        "name": "Campetto da Basket",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.470411380432814,  
+            "lng": 9.160791291528245
+        },
+        "name": "Campetto da basket - Dezza",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.49354292469684, 
+            "lng": 9.14989897915549
+        },
+        "name": "Campetto da Basket - Teodorico",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.44920057690402, 
+            "lng": 9.173057938023929
+        },
+        "name": "Campetti da basket - Famagosta",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.44248480259511, 
+            "lng": 9.162045910216463
+        },
+        "name": "Campo Basket",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.46379187498193, 
+            "lng": 9.132448451578917
+        },
+        "name": "Campetto di Basket - Anemoni",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.485981373701385, 
+            "lng": 9.111424119970936
+        },
+        "name": "Campetti da Basket • TOP",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.46379993657095, 
+            "lng": 9.125743684258046
+        },
+        "name": "Campetti da basket - Moravia",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.45339321652012, 
+            "lng": 9.1218885618325
+        },
+        "name": "Campetti da basket - Bensi",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.483202922487116, 
+            "lng": 9.087046238454246
+        },
+        "name": "Campetto da basket - Piccoli/Chiostergi",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 45.45643708467475, 
+            "lng": 9.101784707774284
+        },
+        "name": "Campetti da basket - Parco dei fontanili",
+        "genere": "Basket",
+        "city": "Milano"
+    },
+    {
+        "geo": {
+            "lat": 42.00159838184801, 
+            "lng": 12.48850005956794
+        },
+        "name": "Campo Da Pallacanestro",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 41.951008423829826, 
+            "lng": 12.524756097763275
+        },
+        "name": "Campo da basket aperto",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 41.93109804174064, 
+            "lng": 12.526068430377046
+        },
+        "name": "Basket Roma Nord 2011",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 41.903030535855656, 
+            "lng": 12.521182304060066
+        },
+        "name": "Basket Playground",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 41.89730591443863, 
+            "lng": 12.486864186730651
+        },
+        "name": "Campetto di pallacanestro all'aperto Davide Ancilotto ",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 41.879480794278784, 
+            "lng": 12.466221580540504
+        },
+        "name": "St'Charles Basket",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 41.88044361675517, 
+            "lng": 12.493660037823085
+        },
+        "name": "Campo da basket Giaime Fiumanò",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 41.89434251251963, 
+            "lng": 12.435404556971136
+        },
+        "name": "Playground Basket Villa Doria Pamphili",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 41.905604195787475, 
+            "lng": 12.416229549501558
+        },
+        "name": "Playground Val Cannuta",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 41.926551552354, 
+            "lng": 12.403934532734652
+        },
+        "name": "Campo da Basket",
+        "genere": "Basket",
+        "city": "Roma"
+    },
+    {
+        "geo": {
+            "lat": 43.76836966976315,
+            "lng": 11.24113801248306
+        },
+        "name": "Campo da Basket del Boschetto",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.76845732553,
+            "lng": 11.240652479765693
+        },
+        "name": "Campo da pallacanestro di Piazza Tasso",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.76655170982136,
+            "lng": 11.203132035141763
+        },
+        "name": "Campo Da Basket Dell'Opera",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.76045036111361,
+            "lng": 11.287935031838582
+        },
+        "name": "Campo da pallacanestro cardinale Elia dalla Costa",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.776816097533214,
+            "lng": 11.267726112401807
+        },
+        "name": "Campino Basket Piazza D'Azeglio",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.779838578011834, 
+            "lng": 11.230483959055597
+        },
+        "name": "Canestro cascine",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.78119343337712,
+            "lng": 11.210852435624975
+        },
+        "name": "Campetto zona cascine",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.78557044923929, 
+            "lng": 11.223843884506223
+        },
+        "name": "Campino Pallacanestro Cascine",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.786404130135146,
+            "lng": 11.238567526526817
+        },
+        "name": "Campo da pallacanestro del giardino Maragliano",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.791926972396844,
+            "lng": 11.218069907243246
+        },
+        "name": "Campo di pallacanestro di Castelnuovo Tedesco",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo":{
+            "lat": 43.79432351874701,
+            "lng": 11.27147919692579
+        },
+        "name": "Campo di Pallacanestro libero dell'Area Pettini Burresi",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.794844494366814, 
+            "lng": 11.19973752943329
+        },
+        "name": "Campo Pallacanestro Filippo Flamini",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.80005400078693,
+            "lng": 11.243619756542946
+        },
+        "name": "Campo da pallacanestro del giardino Galileo",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.8003515476084,
+            "lng": 11.222040068898698
+        },
+        "name": "Campo da basket Vamba",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.79923645859429, 
+            "lng": 11.185132874117588
+        },
+        "name": "Campo pallacanestro San Piero a Quaracchi",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo":{
+            "lat": 43.7945280755431,
+            "lng": 11.167280091525795
+        },
+        "name": "Playground Basket Via Pistoiese",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.78065965848979,
+            "lng":  11.308034146875068
+        },
+        "name": "Playground La Torre",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.795034790252195, 
+            "lng": 11.278336729679106
+        },
+        "name": "Campo di Pallacanestro libero dell'Area Pettini Burresi",
+        "genere": "Basket",
+        "city": "Firenze"
+    },
+    {
+        "geo": {
+            "lat": 43.80878471293471, 
+            "lng": 11.23207779614924
+        },
+        "name": "Campo di pallacanestro del parco Lippi",
+        "genere": "Basket",
+        "city": "Firenze"
+    }
+]

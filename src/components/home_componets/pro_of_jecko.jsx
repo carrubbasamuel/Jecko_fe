@@ -29,7 +29,7 @@ export default function ProOfJecko() {
                             <p><strong><h2>🔮</h2>Atmosfera di Comunità <br/></strong>  Jecko promuove un'atmosfera di comunità tra gli appassionati di sport. Sarai parte di una rete sportiva più ampia e avrai l'opportunità di condividere la tua passione con gli altri.</p>
                         </li>
                         <li className='list-item special'>
-                            <p> <strong><h2>🪄</h2>Sorpresa e Spontaneità <br/></strong> Goditi l'elemento di sorpresa e spontaneità quando giochi nei campi pubblici. Le partite possono iniziare in qualsiasi momento, creando emozioni uniche e momenti indimenticabili.</p>
+                            <p> <strong><h2>🎊</h2>Sorpresa e Spontaneità <br/></strong> Goditi l'elemento di sorpresa e spontaneità quando giochi nei campi pubblici. Le partite possono iniziare in qualsiasi momento, creando emozioni uniche e momenti indimenticabili.</p>
                         </li>
                     </ul>
                 </Col>

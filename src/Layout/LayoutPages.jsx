@@ -9,7 +9,7 @@ import useSocket from '../Hooks/useSocket';
 import Logo from '../asset/jecko_logo.png';
 import Footer from '../components/pages_layout_components/Footer';
 import NavbarMenu from '../components/pages_layout_components/Navbar';
-import { fetchLocationByCity } from '../redux/locationReducer';
+import { fetchLocation } from '../redux/locationReducer';
 
 
 
@@ -32,7 +32,7 @@ export default function LayoutPages({ children }) {
 
 
     const handleRefreshEvent = async ({ location, title}) => {
-        await dispatch(fetchLocationByCity(location.city));
+        await dispatch(fetchLocation());
         const locationName = location.name;
         toast.success(
             <div>

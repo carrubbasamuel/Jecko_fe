@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { Fade } from "react-reveal";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,7 +26,7 @@ export default function FormLogin() {
         }
 
         dispatch(fetchLogin(loginData)).then((res) => {
-            if(res.meta.requestStatus === 'fulfilled') {
+            if (res.meta.requestStatus === 'fulfilled') {
                 navigate('/')
             }
         })
@@ -46,9 +47,23 @@ export default function FormLogin() {
                 </Fade>
                 <a href="/" className="text-muted mt-3">Forgot password?</a>
 
-                <div className="d-flex align-items-center mt-4 justify-content-end ">
-                    <Button type="submit" className="btn-primary me-3">Login</Button>
+            
+                <div className="d-flex align-items-center mt-4 justify-content-between w-100">
+                    <div className="d-flex justify-content-center align-items-center">
+                         <p className="me-2">or</p>
+                    <div className="googlebtn"  onClick={() => window.location.href = process.env.REACT_APP_BACK_URL + '/auth/google'}>
+                        
+                    
+                    <FcGoogle size={24} />
+                   
+                    </div>
+                    </div>
+                   
+                     <div>
+                        <Button type="submit" className="btn-primary me-3">Login</Button>
                     <Link to="/singup" className="text-muted">Singup</Link>
+                    </div>
+                    
                 </div>
             </Fade>
         </Form>

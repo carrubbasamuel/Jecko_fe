@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { notReadMessage } from './chatReducer';
-import { fetchLocationByCity } from './locationReducer';
+import { fetchLocation} from './locationReducer';
 import { sendNewEvent, sendNewMessage, sendNewPlayerAddInYourEvent, setJoinRoom } from './socketReducer';
 
 
@@ -65,7 +65,7 @@ export const fetchCreateEvent = createAsyncThunk(
                 error: 'Compila tutti i campi 😢',
             });
             if (response.status === 201) {
-                dispatch(fetchLocationByCity(getState().location.citySelected))
+                dispatch(fetchLocation())
                 dispatch(sendNewEvent(event))
                 dispatch(fetchOnLoadEvent())
             }
@@ -122,7 +122,7 @@ export const fetchJoinInEvent = createAsyncThunk(
             });
 
             dispatch(sendNewPlayerAddInYourEvent(event))
-            dispatch(fetchLocationByCity(getState().location.citySelected))
+            dispatch(fetchLocation())
              dispatch(sendNewMessage())
             return response.data;
         }

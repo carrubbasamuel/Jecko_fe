@@ -126,7 +126,6 @@
     .offcanvas{
       transition: none!important;
       animation: totop 0.5s ease-in-out;
-      z-index: 100000!important;
     }
 
     @keyframes totop {

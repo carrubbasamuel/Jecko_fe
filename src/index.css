@@ -1,8 +1,67 @@
 html {
-  font-family: 'Jost', sans-serif;
+  font-family: 'League Spartan', sans-serif;
   overflow-x: hidden !important;
 }
 
+
+
+.userProfile{
+  
+  padding: 50px;
+  border-radius: 25px;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.318);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+
+
+
+.games{
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.games span{
+  font-size: 56px;
+}
+
+.Toastify__toast {
+  border-radius: 120px!important;
+  margin: 10px;
+  padding: 0 10px;
+  z-index: 10000;
+  
+}
+.Toastify__progress-bar {
+  visibility: hidden;
+}
+
+.Toastify__close-button {
+  display: none!important;
+}
+
+.Toastify__toast--success{
+  border: 1px solid green;
+}
+
+.Toastify__toast--info{
+  border: 1px solid rgb(20, 63, 174);
+}
+
+.Toastify__toast--error{
+  border: 1px solid red;
+}
+
+.Toastify__toast--warning{
+  border: 1px solid yellow;
+}
 
 .avatar-container {
   position: relative;
@@ -201,6 +260,20 @@ html {
 }
 
 
+
+.googlebtn{
+  padding: 6px 12px;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  background-color: #000000f4!important; 
+  box-shadow: 0 0 10px 0 rgba(117, 117, 117, 0.265);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .marker-event {
   transform: scale(2);
 }
@@ -227,10 +300,67 @@ html {
   z-index: 1;
 }
 
+.centermap{
+  position: absolute;
+  top:50px;
+  right: 0;
+  transform: translate(-50%, -50%);
+  border: none!important;
+  z-index: 1000;
+}
+.centermap button{
+  color: #fff;
+  background-color: orange!important;
+  margin-left: 10px;
+  border: none!important;
+}
+
+.centermap button:hover{
+  color: orange!important;
+  background-color: #fff;
+}
+
 
 @media screen and (max-width: 767px) {
 
-  
+  .userProfile{
+    flex-direction: column;
+    margin: 12px;
+
+  }
+
+  .userProfile h6{
+    font-size: 8px;
+  }
+  .userProfile h1{
+    font-size: 18px!important;
+  }
+
+  .userProfile h3{
+    font-size: 12px!important;
+  }
+  .userProfile #avatar{
+    width: 70px;
+    height: 70px;
+
+  }
+
+  .userProfile hr{
+  display: none;
+  }
+
+  .games{
+    font-size: 18px;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+
+  .centermap{
+    top: 80px;
+    right: -10px;
+    z-index: 200;
+  }
 
   .svg-log {
     display: none;
@@ -251,8 +381,6 @@ html {
   .page-container {
     margin-left: 0;
   }
-
-
 
   .headerlogo {
     margin-top: 20px;

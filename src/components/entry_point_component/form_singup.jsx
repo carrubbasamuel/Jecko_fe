@@ -17,7 +17,7 @@ export default function FormSingup() {
     const username = useRef(null);
     const name = useRef(null);
     const surname = useRef(null);
-    const phone = useRef(null);
+    const city = useRef(null);
     const birthdate = useRef(null);
     const avatarRef = useRef(null);
     const motto = useRef(null);
@@ -30,7 +30,7 @@ export default function FormSingup() {
         formData.append('username', username.current.value);
         formData.append('name', name.current.value);
         formData.append('surname', surname.current.value);
-        formData.append('phone', phone.current.value);
+        formData.append('city', city.current.value);
         formData.append('birthdate', birthdate.current.value);
         formData.append('avatar', avatarRef.current.files[0]);
         formData.append('motto', motto.current.value);
@@ -79,8 +79,8 @@ export default function FormSingup() {
                         <FloatingLabel controlId="floatingInput" label="Username" className="mb-3 required-field">
                             <Form.Control ref={username} type="text" placeholder='Username' />
                         </FloatingLabel>
-                        <FloatingLabel controlId="floatingInput" label="Telefono" className="mb-3 required-field">
-                            <Form.Control ref={phone} pattern="[0-9]{10}" type="phone" />
+                        <FloatingLabel controlId="floatingInput" label="Città" className="mb-3 required-field">
+                            <Form.Control ref={city} type="text" placeholder='Città' />
                         </FloatingLabel>
                         <FloatingLabel controlId="floatingInput" label="Data di nascita" className="mb-3 required-field">
                             <Form.Control ref={birthdate} type="date" />

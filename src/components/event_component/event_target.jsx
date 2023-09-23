@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { FaLocationArrow } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { setShowDetails } from '../../redux/eventReducer';
 import EventAccordion from './event_accordion_list';
@@ -19,13 +20,18 @@ export default function EventTarget({ field }) {
         setEventDate(false);
     };
 
-    
+    const heandleGo = () => {
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${field.geo.lat},${field.geo.lng}`;
+        window.open(googleMapsUrl, "_blank");
+    }
+
+
 
     return (
         <>
             <Offcanvas show={showDetails} id='field-details' onHide={handleClose} placement='end'>
                 <div className='text-end me-4 mt-4'>
-                    <AiFillCloseCircle onClick={handleClose} size={30} style={{cursor: 'pointer'}} />
+                    <AiFillCloseCircle onClick={handleClose} size={30} style={{ cursor: 'pointer' }} />
                 </div>
                 <div className='eventCardDetails'>
                     <div>
@@ -34,9 +40,10 @@ export default function EventTarget({ field }) {
                     {eventDate && <FormSetPrenotation setEventDate={setEventDate} />}
                     {!eventDate && <>
                         <div className='scrollable-content'>
-                        <EventInProgress />
+                            <EventInProgress />
                             <div className='image-cover'>
                                 <img src={field.cover} alt='fieldphoto' />
+                                <Button variant='primary' className='goto' onClick={heandleGo}><FaLocationArrow size={18}/></Button>
                             </div>
                             <EventAccordion />
                         </div>

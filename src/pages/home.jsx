@@ -6,11 +6,16 @@ import logo from '../asset/jecko_logo.png';
 import CarouselOfJecko from '../components/home_componets/carousel_of_jecko';
 import HowCity from '../components/home_componets/howCity';
 import ProOfJecko from '../components/home_componets/pro_of_jecko';
+import { useEffect } from 'react';
 
 
 
 
 export default function Home() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <LayoutPages>
             <main className='main-home d-flex flex-column justify-content-start align-items-center mt-3'>

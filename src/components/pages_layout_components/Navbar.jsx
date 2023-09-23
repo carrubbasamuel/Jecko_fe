@@ -11,14 +11,8 @@ import './style.css';
 
 
 export default function NavbarMenu() {
-  const dispatch = useDispatch()
   const { profile } = useSelector(state => state.user)
   const {notReadMessage} = useSelector(state => state.chat)
-
-
-  useEffect(() => {
-    dispatch(fetchProfile())
-  }, [dispatch])
 
 
   return (

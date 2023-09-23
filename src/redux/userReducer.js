@@ -15,6 +15,9 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
+        setUser(state, action) {
+            state.user_token = action.payload;
+        },
         logout: (state, action) => {
             localStorage.removeItem("user");
             state.user_token = null;
@@ -124,7 +127,7 @@ export const fetchSingup = createAsyncThunk(
 
 export const fetchProfile = createAsyncThunk(
     "user/fetchProfile",
-    async (_, { getState, dispatch}) => {
+    async (_, { getState }) => {
         try {
             const { user_token } = getState().user;
             const response = await axios.get(process.env.REACT_APP_BACK_URL + "/profile", {
@@ -153,5 +156,5 @@ export const fetchProfile = createAsyncThunk(
 
 
 
-export const { logout } = userSlice.actions;
+export const { setUser, logout } = userSlice.actions;
 export default userSlice.reducer;
