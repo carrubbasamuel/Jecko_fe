@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { notReadMessage } from './chatReducer';
-import { fetchLocation} from './locationReducer';
+import { fetchLocation } from './locationReducer';
 import { sendNewEvent, sendNewMessage, sendNewPlayerAddInYourEvent, setJoinRoom } from './socketReducer';
 
 
@@ -22,7 +22,7 @@ const eventSlice = createSlice({
     },
     extraReducers: (builder) => {
         //Event By Location
-        builder.addCase(fetchEventByLocation.pending, (state, action) => {
+        builder.addCase(fetchEventByLocation.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(fetchEventByLocation.fulfilled, (state, action) => {
@@ -34,7 +34,7 @@ const eventSlice = createSlice({
             state.error = action.error.message;
         });
         //Event OnLoad
-        builder.addCase(fetchOnLoadEvent.pending, (state, action) => {
+        builder.addCase(fetchOnLoadEvent.pending, (state) => {
             state.loading = true;
         }
         );
@@ -123,7 +123,8 @@ export const fetchJoinInEvent = createAsyncThunk(
 
             dispatch(sendNewPlayerAddInYourEvent(event))
             dispatch(fetchLocation())
-             dispatch(sendNewMessage())
+            dispatch(sendNewMessage())
+            dispatch(fetchEventByLocation(event.locationId))
             return response.data;
         }
         catch (error) {

@@ -52,7 +52,7 @@ export default function ChatList() {
           <div className='chatempty'>
             Unisciti ad un evento per chattare con i partecipanti!
           </div>}
-          {chatSelected && <Chat chat={chatSelected} close={setChatSelected} />}
+          {chatSelected && <Chat chat={chatSelected} close={setChatSelected} handleCloseOffcanvas={handleClose} />}
           {!chatSelected && listChat && listChat.map((chat, index) => (
             <div key={index} className='chat-item' onClick={() => handleSelectChat(chat)}>
               <Image src={chat.location.cover} roundedCircle width={50} height={50}c className='shadow' />

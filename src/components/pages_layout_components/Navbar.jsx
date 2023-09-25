@@ -1,4 +1,3 @@
-
 import Image from 'react-bootstrap/Image';
 import { AiFillHome } from 'react-icons/ai';
 import { FaMapMarked } from 'react-icons/fa';

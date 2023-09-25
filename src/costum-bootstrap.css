@@ -59,3 +59,8 @@
 a{
     color: black;
 }
+
+.accordion-item:first-of-type .accordion-button {
+    border-top-left-radius: 0!important;
+    border-top-right-radius: 0!important;
+}

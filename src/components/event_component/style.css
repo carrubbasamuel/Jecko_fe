@@ -19,7 +19,35 @@ body{
   
   }
   
+  #eventDate{
+    margin: 10px;
+    background-color: blueviolet;
+    color: #fff;
+    border-radius: 20px;
+    padding: 15px;
+  }
 
+  #eventDate a{
+    color: #fff!important;
+  }
+
+  .accordion-body> div:last-of-type p{
+    padding:  10px;
+  }
+
+  .accordion-body{
+    padding: 0!important;
+  }
+
+  .accordion-body>p{
+    padding: 10px;
+   text-align: center;
+  }
+
+  .joinButton{
+    margin: 15px;
+    
+  }
   
   
   .scrollable-content {

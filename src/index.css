@@ -27,6 +27,9 @@ html {
   align-items: center;
   flex-grow: 1;
 }
+.games p{
+  width: 100px;
+}
 
 .games span{
   font-size: 56px;
@@ -326,6 +329,7 @@ html {
   .userProfile{
     flex-direction: column;
     margin: 12px;
+    padding: 10px 10px;
 
   }
 
@@ -353,7 +357,6 @@ html {
     font-size: 18px;
     width: 100%;
     margin-top: 20px;
-    justify-content: space-between;
   }
 
   .centermap{

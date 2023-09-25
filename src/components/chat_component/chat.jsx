@@ -7,9 +7,10 @@ import useSocket from "../../Hooks/useSocket";
 import { fetchChat, fetchMessage, fetchReadMessage } from "../../redux/chatReducer";
 import { sendNewMessage } from "../../redux/socketReducer";
 import { setChat } from "../../redux/chatReducer";
+import { Link } from "react-router-dom";
 
 
-export default function Chat({ chat, close }) {
+export default function Chat({ chat, close, handleCloseOffcanvas }) {
     const dispatch = useDispatch();
     const allMessage = useSelector(state => state.chat.chat);
     const [newMessage, setNewMessage] = useState("");
@@ -85,7 +86,12 @@ export default function Chat({ chat, close }) {
                                 type: 'text',
                                 text: message.message,
                                 date: new Date(message.createdAt),
-                                title: message.sender.username,
+                                title: (
+                                    message.isMine ? message.sender.username :
+                                    <Link to={`/profile/${message.sender._id}`} onClick={handleCloseOffcanvas}>
+                                        {message.sender.username}
+                                    </Link>
+                                ),
                                 avatar: message.sender.avatar,
                             }
                         }

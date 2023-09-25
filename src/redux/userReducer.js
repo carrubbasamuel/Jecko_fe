@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 const initialState = {
     user_token: localStorage.getItem("user") || null,
     profile: null,
+    userProfile: null,
     loading: false,
     error: null,
 };
@@ -18,14 +19,14 @@ const userSlice = createSlice({
         setUser(state, action) {
             state.user_token = action.payload;
         },
-        logout: (state, action) => {
+        logout: (state) => {
             localStorage.removeItem("user");
             state.user_token = null;
         }
     },
     extraReducers: (builder) => {
         //Login
-        builder.addCase(fetchLogin.pending, (state, action) => {
+        builder.addCase(fetchLogin.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(fetchLogin.fulfilled, (state, action) => {
@@ -35,13 +36,13 @@ const userSlice = createSlice({
         });
         builder.addCase(fetchLogin.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.error.message; // Messaggio di errore dal backend
+            state.error = action.error.message;
         });
         //Singup
-        builder.addCase(fetchSingup.pending, (state, action) => {
+        builder.addCase(fetchSingup.pending, (state) => {
             state.loading = true;
         });
-        builder.addCase(fetchSingup.fulfilled, (state, action) => {
+        builder.addCase(fetchSingup.fulfilled, (state) => {
             state.loading = false;
         });
         builder.addCase(fetchSingup.rejected, (state, action) => {
@@ -50,7 +51,7 @@ const userSlice = createSlice({
             state.error = state.error + action.payload
         });
         //Profile
-        builder.addCase(fetchProfile.pending, (state, action) => {
+        builder.addCase(fetchProfile.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(fetchProfile.fulfilled, (state, action) => {
@@ -58,6 +59,19 @@ const userSlice = createSlice({
             state.profile = action.payload;
         })
         builder.addCase(fetchProfile.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
+        //Profile User
+        builder.addCase(fetchUserProfile.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(fetchUserProfile.fulfilled, (state, action) => {
+            state.loading = false;
+            console.log(action.payload);
+            state.userProfile = action.payload;
+        })
+        builder.addCase(fetchUserProfile.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message;
         })
@@ -139,11 +153,7 @@ export const fetchProfile = createAsyncThunk(
             return response.data;
         } catch (error) {
             if(error.response.status === 401){
-                toast.error("Unauthorized");
-                setTimeout(() => {
-                  window.location.href = "/login";
-                }, 1000);
-                throw error;
+                window.location.href = "/login";
             }
             error.response.data.errors.forEach((err) => {
                 toast.error(err.msg);
@@ -153,6 +163,23 @@ export const fetchProfile = createAsyncThunk(
     }
 );
 
+export const fetchUserProfile = createAsyncThunk(
+    "user/fetchUserProfile",
+    async (id, {getState}) =>  {
+        try{const { user_token } = getState().user;
+        const response = await axios.get(process.env.REACT_APP_BACK_URL + "/profile/" + id, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: user_token
+            }
+        })
+        return response.data;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+)
 
 
 

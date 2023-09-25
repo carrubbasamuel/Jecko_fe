@@ -1,19 +1,23 @@
 
 import { useEffect } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
+import { BsFillGearFill } from 'react-icons/bs';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { RxExit } from 'react-icons/rx';
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LayoutPages from "../Layout/LayoutPages";
 import MediaList from "../components/profile_component/MedalList";
-import { logout } from "../redux/userReducer";
+import { fetchProfile, fetchUserProfile, logout } from "../redux/userReducer";
 
 
 export default function Profile() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { profile } = useSelector(state => state.user)
+    const { id } = useParams()
+    const LoggedUserProfile = useSelector(state => state.user.profile)
+    const usersProfile = useSelector(state => state.user.userProfile)
+    
 
     const handleLogout = async () => {
         await dispatch(logout())
@@ -25,12 +29,25 @@ export default function Profile() {
     }, [])
 
     
+    useEffect(() => {
+        if(id){
+            dispatch(fetchUserProfile(id))
+        }else{
+            dispatch(fetchProfile())
+        }
+    }, [dispatch, id])
+   
+    const profile = id ? usersProfile : LoggedUserProfile;
 
     return (
         <LayoutPages>
             <Container>
                 <div className="d-flex justify-content-end m-5">
+                    {/* <div className="settings">
+                        <BsFillGearFill size={30} />
+                    </div> */}
                     <div onClick={handleLogout} className="logout">
+                        
                         <RxExit size={30} />
                     </div>
                 </div>

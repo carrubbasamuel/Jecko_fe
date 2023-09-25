@@ -46,6 +46,8 @@ function App() {
           <Route path="/" element={<PROTECTED_ROUTE element={<Home />} />} />
           <Route path="/map" element={<PROTECTED_ROUTE element={<Maps />} />} />
           <Route path="/profile" element={<PROTECTED_ROUTE element={<Profile />} />} />
+          <Route path="/profile/:id" element={<PROTECTED_ROUTE element={<Profile />} />} />
+          
         </Routes>
       </BrowserRouter>
 
