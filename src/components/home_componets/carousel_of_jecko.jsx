@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import carouselJSON from './imageCarousel.json';
 import './style.css';
 
+import { Fade } from 'react-reveal';
 export default function CarouselOfJecko() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [scrollDirection, setScrollDirection] = useState(1);

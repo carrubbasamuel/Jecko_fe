@@ -33,6 +33,18 @@
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    animation: appear 1s ease-in-out;
+}
+
+@keyframes appear{
+    0%{
+        opacity: 0;
+        
+    }
+    100%{
+        opacity: 1;
+        
+    }
 }
 
 .itemCarousel:nth-child(even){

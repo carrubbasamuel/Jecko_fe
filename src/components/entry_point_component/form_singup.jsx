@@ -1,14 +1,13 @@
-import React, { useRef } from 'react';
+
+import React, { useRef, useState } from 'react';
 import { Button, FloatingLabel, Form, FormGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Fade } from 'react-reveal';
 import { useNavigate } from 'react-router-dom';
-import { fetchLogin, fetchSingup } from '../../redux/userReducer';
+import { fetchLogin, fetchSignup } from '../../redux/userReducer';
 import ImageUploader from './avatar';
 
-
-
-export default function FormSingup() {
+export default function FormSignup() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -21,6 +20,19 @@ export default function FormSingup() {
     const birthdate = useRef(null);
     const avatarRef = useRef(null);
     const motto = useRef(null);
+
+    const [citySuggestions, setCitySuggestions] = useState([]);
+  
+    const handleCityChange = async (e) => {
+        const searchTerm = e.target.value;
+        try {
+            const response = await fetch(`https://api.example.com/cities?q=${searchTerm}`);
+            const data = await response.json();
+            setCitySuggestions(data); // Assumi che il formato della risposta sia un array di nomi di città
+        } catch (error) {
+            console.error('Errore durante la ricerca delle città:', error);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -47,8 +59,6 @@ export default function FormSingup() {
         })
     }
 
-
-
     return (
         <Form onSubmit={handleSubmit} className="d-flex flex-column">
             <Fade bottom cascade>
@@ -60,7 +70,7 @@ export default function FormSingup() {
                 <div >
                     <Fade bottom cascade>
 
-                        <FloatingLabel controlId="floatingInput" label="Email" className="mb-3 required-field"  >
+                        <FloatingLabel controlId="floatingInput" label="Email" className="mb-3 required-field">
                             <Form.Control ref={email} type="email" placeholder='Email' />
                         </FloatingLabel>
                         <FloatingLabel controlId="floatingInput" label="Password" className="mb-3 required-field">
@@ -80,7 +90,18 @@ export default function FormSingup() {
                             <Form.Control ref={username} type="text" placeholder='Username' />
                         </FloatingLabel>
                         <FloatingLabel controlId="floatingInput" label="Città" className="mb-3 required-field">
-                            <Form.Control ref={city} type="text" placeholder='Città' />
+                            <Form.Control 
+                                ref={city} 
+                                type="text" 
+                                placeholder='Città'
+                                list="citySuggestions" 
+                                onChange={handleCityChange} 
+                            />
+                            <datalist id="citySuggestions">
+                                {citySuggestions.map((suggestion, index) => (
+                                    <option key={index} value={suggestion} />
+                                ))}
+                            </datalist>
                         </FloatingLabel>
                         <FloatingLabel controlId="floatingInput" label="Data di nascita" className="mb-3 required-field">
                             <Form.Control ref={birthdate} type="date" />
@@ -90,13 +111,11 @@ export default function FormSingup() {
                             <Form.Control ref={motto} as="textarea" />
                         </FloatingLabel>
                         <div className="d-flex align-items-center mt-4 justify-content-end ">
-                            <Button type="submit" className="btn-primary me-3">Join Whith Us!</Button>
+                            <Button type="submit" className="btn-primary me-3">Join With Us!</Button>
                         </div>
                     </Fade>
                 </div>
             </div>
-
         </Form>
-
     )
 }

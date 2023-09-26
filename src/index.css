@@ -5,65 +5,94 @@ html {
 
 
 
-.userProfile{
-  
-  padding: 50px;
-  border-radius: 25px;
-  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.318);
+.userProfile {
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
 }
 
+.userProfile img {
+  margin-right: 20px;
+}
+
+div.change{
+  position: absolute;
+  display: flex!important;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #878787b6;
+  left: 10px;
+  bottom: -10px;
+  border: 3px solid #fff;
+  color: white!important;
+  }
+  .file-input {
+ 
+    width: 0;
+    height: 0;
+  }
+  
 
 
+  div.change:hover{
+    background-color: #878787;
+    cursor: pointer;
+  }
 
-.games{
+
+.games {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 32px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  flex-grow: 1;
-}
-.games p{
-  width: 100px;
+  width: 300px;
 }
 
-.games span{
+
+
+.games span {
   font-size: 56px;
 }
 
 .Toastify__toast {
-  border-radius: 120px!important;
+  border-radius: 120px !important;
   margin: 10px;
   padding: 0 10px;
   z-index: 10000;
-  
+
 }
+
 .Toastify__progress-bar {
   visibility: hidden;
 }
 
 .Toastify__close-button {
-  display: none!important;
+  display: none !important;
 }
 
-.Toastify__toast--success{
+.Toastify__toast--success {
   border: 1px solid green;
 }
 
-.Toastify__toast--info{
+.Toastify__toast--info {
   border: 1px solid rgb(20, 63, 174);
 }
 
-.Toastify__toast--error{
+.Toastify__toast--error {
   border: 1px solid red;
 }
 
-.Toastify__toast--warning{
+.Toastify__toast--warning {
   border: 1px solid yellow;
+}
+
+.motto {
+  font-size: 16px;
+  max-width: 300px !important;
+  word-wrap: break-word;
+  /* Abilita il word wrapping */
 }
 
 .avatar-container {
@@ -139,6 +168,8 @@ html {
     transform: scale(1);
   }
 }
+
+
 
 
 .loading-indicator {
@@ -264,12 +295,12 @@ html {
 
 
 
-.googlebtn{
+.googlebtn {
   padding: 6px 12px;
   border-radius: 15px;
   color: white;
   cursor: pointer;
-  background-color: #000000f4!important; 
+  background-color: #000000f4 !important;
   box-shadow: 0 0 10px 0 rgba(117, 117, 117, 0.265);
   display: flex;
   align-items: center;
@@ -303,63 +334,96 @@ html {
   z-index: 1;
 }
 
-.centermap{
+.centermap {
   position: absolute;
-  top:50px;
+  top: 50px;
   right: 0;
   transform: translate(-50%, -50%);
-  border: none!important;
+  border: none !important;
   z-index: 1000;
 }
-.centermap button{
+
+.centermap button {
   color: #fff;
-  background-color: orange!important;
+  background-color: orange !important;
   margin-left: 10px;
-  border: none!important;
+  border: none !important;
 }
 
-.centermap button:hover{
-  color: orange!important;
+.centermap button:hover {
+  color: orange !important;
   background-color: #fff;
 }
 
 
 @media screen and (max-width: 767px) {
 
-  .userProfile{
+  .userProfile {
     flex-direction: column;
-    margin: 12px;
-    padding: 10px 10px;
+    margin: 0;
+    padding: 0;
 
   }
 
-  .userProfile h6{
-    font-size: 8px;
+
+  .userProfile #avatar {
+    width: 140px;
+    height: 140px;
+    position: relative;
   }
+  div.change{
+    position: absolute;
+    display: flex!important;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #878787b6;
+    left: 10px;
+    bottom: -10px;
+    border: 3px solid #fff;
+    color: white!important;
+    }
+
   .userProfile h1{
-    font-size: 18px!important;
+    font-size: 20px;
   }
 
-  .userProfile h3{
-    font-size: 12px!important;
-  }
-  .userProfile #avatar{
-    width: 70px;
-    height: 70px;
-
+  .userProfile img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
   }
 
-  .userProfile hr{
-  display: none;
+  
+
+
+
+  .logout {
+    background-color: transparent !important;
+    padding: 10px;
   }
 
-  .games{
-    font-size: 18px;
+
+  .setting {
+    font-size: 12px;
     width: 100%;
     margin-top: 20px;
   }
 
-  .centermap{
+  .userProfile hr {
+    display: none;
+  }
+
+
+
+  .games {
+    font-size: 18px;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: space-around;
+    margin-top: 80px;
+  }
+
+  .centermap {
     top: 80px;
     right: -10px;
     z-index: 200;
@@ -375,11 +439,11 @@ html {
     padding-top: 50px !important;
   }
 
-  main > *:not(#carousel) {
+  main>*:not(#carousel) {
     padding: 20px;
   }
 
-  
+
 
   .page-container {
     margin-left: 0;

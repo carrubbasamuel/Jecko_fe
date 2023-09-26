@@ -75,6 +75,28 @@ const userSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
         })
+        builder.addCase(fetchPatchUser.pending, (state) => {
+            state.loading = true;
+        })
+        builder.addCase(fetchPatchUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.profile = action.payload;
+        })
+        builder.addCase(fetchPatchUser.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
+        builder.addCase(fetchPatchImgUser.pending, (state) => {
+            state.loading = true;
+        })
+        builder.addCase(fetchPatchImgUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.profile = action.payload;
+        })
+        builder.addCase(fetchPatchImgUser.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
     }
 });
 
@@ -89,7 +111,7 @@ export const fetchLogin = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            if(error.response.status === 401 || error.response.status === 404){
+            if (error.response.status === 401 || error.response.status === 404) {
                 toast.error("Email or password incorrect");
                 throw error;
             }
@@ -133,9 +155,9 @@ export const fetchSingup = createAsyncThunk(
                 default:
                     toast.error("Server error");
                     break;
-                }
             }
         }
+    }
 );
 
 
@@ -152,7 +174,7 @@ export const fetchProfile = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            if(error.response.status === 401){
+            if (error.response.status === 401) {
                 window.location.href = "/login";
             }
             error.response.data.errors.forEach((err) => {
@@ -165,22 +187,63 @@ export const fetchProfile = createAsyncThunk(
 
 export const fetchUserProfile = createAsyncThunk(
     "user/fetchUserProfile",
-    async (id, {getState}) =>  {
-        try{const { user_token } = getState().user;
-        const response = await axios.get(process.env.REACT_APP_BACK_URL + "/profile/" + id, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: user_token
-            }
-        })
-        return response.data;
+    async (id, { getState }) => {
+        try {
+            const { user_token } = getState().user;
+            const response = await axios.get(process.env.REACT_APP_BACK_URL + "/profile/" + id, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: user_token
+                }
+            })
+            return response.data;
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     }
 )
 
+
+export const fetchPatchUser = createAsyncThunk(
+    'user/fetchPAtchUser',
+    async (form, { getState }) => {
+        try {
+            const { user_token } = getState().user;
+            const response = await axios.patch(process.env.REACT_APP_BACK_URL + "/editUser", form, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: user_token
+                }
+            })
+            console.log(response.data);
+            return response.data
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+)
+
+export const fetchPatchImgUser = createAsyncThunk(
+    'user/fetchPatchImgUser',
+    async (form, { getState }) => {
+        try {
+            const { user_token } = getState().user;
+            const response = await axios.patch(process.env.REACT_APP_BACK_URL + "/editUser/avatar", form, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: user_token
+                }
+            })
+            
+            return response.data
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+)
 
 
 export const { setUser, logout } = userSlice.actions;
