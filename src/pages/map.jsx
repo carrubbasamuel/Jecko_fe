@@ -39,6 +39,10 @@ export default function Maps() {
     }
   }, [dispatch, showDetails, fieldSelected]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleCenterMap = (cityName) => {
     if (mapRef.current) {
       const find = location.cityCoords.find(city => city.city === cityName);
