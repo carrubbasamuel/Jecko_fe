@@ -230,13 +230,16 @@ export const fetchPatchImgUser = createAsyncThunk(
     async (form, { getState }) => {
         try {
             const { user_token } = getState().user;
-            const response = await axios.patch(process.env.REACT_APP_BACK_URL + "/editUser/avatar", form, {
+            const response = await toast.promise(axios.patch(process.env.REACT_APP_BACK_URL + "/editUser/avatar", form, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: user_token
                 }
+            }),{
+                pending: "Caricando...",
+                success: "Caricata con successo",
+                error: "Errore durante il caricamento",
             })
-            
             return response.data
         } catch (error) {
             console.log(error);

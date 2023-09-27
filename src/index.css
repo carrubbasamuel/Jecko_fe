@@ -28,9 +28,9 @@ div.change{
   color: white!important;
   }
   .file-input {
- 
-    width: 0;
-    height: 0;
+    opacity: 0;
+    width: 0!important;
+    height: 0!important;
   }
   
 
@@ -92,7 +92,6 @@ div.change{
   font-size: 16px;
   max-width: 300px !important;
   word-wrap: break-word;
-  /* Abilita il word wrapping */
 }
 
 .avatar-container {
