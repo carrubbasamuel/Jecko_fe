@@ -8,6 +8,17 @@
     justify-content: center;
 } 
 
+.btn-danger{
+    background-color: #8c1e1e89;
+    border-color: transparent!important;
+    border-radius: 20px;
+}
+
+.btn-danger:hover{
+    background-color: #c22626;
+    border-radius: 20px;
+}
+
 #medal img{
     transition: all 0.3s ease-in-out;
 }

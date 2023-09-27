@@ -245,6 +245,24 @@ export const fetchPatchImgUser = createAsyncThunk(
 
 )
 
+export const fetchDelateUser = createAsyncThunk(
+    'user/fetchDelateUser',
+    async (_, { getState }) => {
+        try {
+            const { user_token } = getState().user;
+            const response = await axios.delete(process.env.REACT_APP_BACK_URL + "/editUser/deleteUser", {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: user_token
+                }
+            })
+            return response.data
+        } catch (error) {
+            console.log(error);
+        }
+    }
+)
+
 
 export const { setUser, logout } = userSlice.actions;
 export default userSlice.reducer;

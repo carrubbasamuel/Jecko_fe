@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPatchUser } from '../../redux/userReducer';
+import { useNavigate } from 'react-router-dom';
+import { fetchDelateUser, fetchPatchUser } from '../../redux/userReducer';
 
-export default function EditModal({ show, handleClose}) {
+export default function EditModal({ show, handleClose }) {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const userData = useSelector(state => state.user.profile)
     const [formData, setFormData] = useState({
         username: userData.username || '',
@@ -21,7 +23,7 @@ export default function EditModal({ show, handleClose}) {
 
     const handleSave = () => {
         dispatch(fetchPatchUser(formData))
-        handleClose(); 
+        handleClose();
     };
 
     return (
@@ -81,16 +83,25 @@ export default function EditModal({ show, handleClose}) {
 
 
                     <Form.Group controlId="formMotto">
-                        <Form.Label>Frase</Form.Label>
+                        <Form.Label>Motto</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Frase"
+                            placeholder="Motto"
                             name="motto"
                             value={formData.motto}
                             onChange={handleChange}
                         />
                     </Form.Group>
                 </Form>
+                    <Modal.Title className='mt-3'>Vuoi eliminare il tuo profilo?</Modal.Title>
+                <p className='text-muted p-2'>
+                    Sei sicuro di voler eliminare il tuo profilo? Questa azione è irreversibile.
+                    Verrano eliminati tutti i tuoi dati e non potrai più accedere al tuo profilo.
+                    inoltre verranno eliminati tutti gli eventi e le chat di cui sei amministratore.
+                </p>
+                <Button variant="danger" onClick={() => dispatch(fetchDelateUser()).then(() => navigate('/login'))}>
+                    Elimina il tuo profilo
+                </Button>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
