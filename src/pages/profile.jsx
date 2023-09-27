@@ -63,22 +63,22 @@ export default function Profile() {
         <LayoutPages>
 
             <Container>
-                <div className="d-flex justify-content-end align-items-center m-md-5 mt-5 me-4 mb-5" onClick={handleShow}>
+                {!id && <div className="d-flex justify-content-end align-items-center m-md-5 mt-5 me-4 mb-5" onClick={handleShow}>
                     <div className="logout me-2">
                         <BsFillGearFill size={30} />
                     </div>
                     <div onClick={handleLogout} className="logout">
                         <RxExit size={30} />
                     </div>
-                </div>
+                </div>}
 
-                <Row id="profile" className="flex-column ">
+                <Row id="profile" className={`flex-column ${id ? 'mt-5 pt-5' : ''}`}>
                     <Col className="d-flex justify-content-start align-items-stretch gap-3" >
                         <div className="userProfile">
                             <div className="d-flex align-items-center">
                                 <div className="position-relative">
                                     <Image id="avatar" src={profile?.avatar} alt='avatar' roundedCircle width={150} height={150} />
-                                    <div className="change"  onClick={handleAvatarClick}>
+                                    {!id && <div className="change"  onClick={handleAvatarClick}>
                                         <RxUpdate size={20} />
                                         <input
                                             type="file"
@@ -86,13 +86,13 @@ export default function Profile() {
                                             onChange={handleFileChange}
                                             ref={fileInputRef}
                                         />
-                                    </div>
+                                    </div>}
                                 </div>
                                 <div >
                                     <h6 className="fw-bold">{profile?.username}</h6>
                                     <h1>{profile?.name} {profile?.surname}</h1>
-                                    {profile?.city ? <span className="fs-6"><FaMapMarkerAlt /> {profile?.city}</span> : null}
                                     <p className="motto">{profile?.motto}</p>
+                                    {profile?.city ? <span className="fs-6"><FaMapMarkerAlt /> {profile?.city}</span> : null}
                                 </div>
                             </div>
                             <hr style={{
@@ -114,7 +114,7 @@ export default function Profile() {
                     </Col>
                 </Row>
             </Container>
-            {profile && <EditModal show={show} handleClose={handleClose} />}
+            {profile && !id && <EditModal show={show} handleClose={handleClose} />}
         </LayoutPages>
     )
 }
