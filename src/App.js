@@ -10,6 +10,7 @@ import Home from "./pages/home";
 import Maps from "./pages/map";
 import OauthSuccess from "./pages/oAuthSuccess";
 import Profile from "./pages/profile";
+import RestorePass from "./pages/restorePass";
 
 
 
@@ -42,6 +43,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<LayoutEntryPoint><FormLogin /></LayoutEntryPoint>} />
           <Route path="/singup" element={<LayoutEntryPoint><FormSingup /></LayoutEntryPoint>} />
+          <Route path="/forgot-password" element={<RestorePass />} />
           <Route path="/login/:token" element={<OauthSuccess />} />
           <Route path="/" element={<PROTECTED_ROUTE element={<Home />} />} />
           <Route path="/map" element={<PROTECTED_ROUTE element={<Maps />} />} />

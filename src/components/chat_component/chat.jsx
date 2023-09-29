@@ -105,6 +105,7 @@ export default function Chat({ chat, close, handleCloseOffcanvas }) {
                 <input
                     type="text"
                     value={newMessage}
+                    className='text-decoration-none text-dark'
                     onChange={(e) => setNewMessage(e.target.value)}
                     onKeyPress={(e) => {
                         if (e.shiftKey && e.charCode === 13) {

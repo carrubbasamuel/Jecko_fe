@@ -42,10 +42,12 @@ export default function FormLogin() {
                     </FloatingLabel>
 
                     <FloatingLabel controlId="floatingPassword" label="Password">
+                        
                         <Form.Control ref={password} type="password" placeholder="Password" />
                     </FloatingLabel>
                 </Fade>
-                <a href="/" className="text-muted mt-3">Forgot password?</a>
+                <Link to="/forgot-password" className="float-start text-muted mt-3">Forgot password?</Link>
+             
 
             
                 <div className="d-flex align-items-center mt-4 justify-content-between w-100">

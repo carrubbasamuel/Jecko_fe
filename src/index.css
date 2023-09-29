@@ -206,6 +206,20 @@ div.change{
   color: #fff;
 }
 
+.restore{
+  height: 100vh;
+  width: 100vw!important;
+}
+
+.exit{
+  position: absolute;
+  top: 100px;
+  left: 200px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 .required-field::after {
   content: "*";
   position: absolute;
@@ -396,7 +410,11 @@ div.change{
   }
 
   
-
+  .exit{
+  
+    top: 250px;
+    left: 20px;
+  }
 
 
   .logout {

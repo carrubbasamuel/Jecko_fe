@@ -4,6 +4,7 @@ import locationReducer from "./locationReducer";
 import socketReducer from "./socketReducer";
 import userReducer from "./userReducer";
 import chatReducer from "./chatReducer";
+import restoreReducer from "./restoreReducer";
 import thunk from "redux-thunk";
 
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     event: eventReducer,
     socket: socketReducer,
     chat: chatReducer,
+    restore: restoreReducer
 });
 
 const store = configureStore({
