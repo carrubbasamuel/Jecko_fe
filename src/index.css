@@ -126,7 +126,6 @@ div.change{
   width: 100%;
   height: 100%;
   border-radius: 50%;
-
 }
 
 
@@ -359,6 +358,21 @@ div.change{
   z-index: 1000;
 }
 
+
+.image-profile{
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.image-profile img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .centermap button {
   color: #fff;
   background-color: orange !important;
@@ -382,7 +396,7 @@ div.change{
   }
 
 
-  .userProfile #avatar {
+  .image-profile{
     width: 140px;
     height: 140px;
     position: relative;
@@ -403,15 +417,14 @@ div.change{
     font-size: 20px;
   }
 
-  .userProfile img {
+  .image-profile{
     width: 100px;
     height: 100px;
-    margin-right: 20px;
+    
   }
 
   
   .exit{
-  
     top: 250px;
     left: 20px;
   }

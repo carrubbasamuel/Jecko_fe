@@ -7,6 +7,7 @@ import './style.css';
 
 export default function HowCity() {
     return (
+        <Fade bottom>
         <div id='howCity'>
             <Fade bottom>
                 <h2>Dove puoi trovarci? 🗺️</h2>
@@ -35,5 +36,6 @@ export default function HowCity() {
                 </Fade>
             </div>
         </div>
+        </Fade>
     )
 }

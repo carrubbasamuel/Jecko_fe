@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
@@ -59,14 +59,9 @@ export const forgot = createAsyncThunk(
                     'Content-Type': 'application/json'
                 }
             });
-            
-            if (response.status === 200) {
-                return response.data; 
-            } else {
-                return thunkAPI.rejectWithValue(response.data);
-            }
+            return response.data
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue(error.response.status);
         }
     }
 );
@@ -80,14 +75,9 @@ export const checkPin = createAsyncThunk(
                     'Content-Type': 'application/json'
                 }
             });
-            
-            if (response.status === 200) {
-                return response.data;
-            } else {
-                return thunkAPI.rejectWithValue(response.data);
-            }
+            return response.data
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue(error.response.status);
         }
     }
 );
@@ -102,13 +92,10 @@ export const changePass = createAsyncThunk(
                 }
             });
             
-            if (response.status === 200) {
-                return response; 
-            } else {
-                return thunkAPI.rejectWithValue(response.data);
-            }
+            return response.data
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            console.log(error);
+            return thunkAPI.rejectWithValue(error.response);
         }
     }
 );

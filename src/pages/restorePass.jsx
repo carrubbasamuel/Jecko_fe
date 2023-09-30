@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Fade } from 'react-reveal';
 import { Link, useNavigate } from 'react-router-dom';
 import { changePass, checkPin, forgot, reset } from '../redux/restoreReducer';
+import {toast} from 'react-toastify'
 
 
 export default function RestorePass() {
@@ -20,17 +21,31 @@ export default function RestorePass() {
 
     const handleClick = () => {
         if (step === 0) {
-            dispatch(forgot(email.current.value));
-            setStep(1);
+            dispatch(forgot(email.current.value)).then((res) => {
+                if(res.payload === 404){
+                    toast.error('Email non valida')
+                }else{
+                     setStep(1);
+                }
+            })
+           
         } if (step === 1) {
-            dispatch(checkPin({ pin: pin.current.value }));
-            setStep(2);
+            dispatch(checkPin({ pin: pin.current.value })).then((res)=> {
+                if(res.payload === 404){
+                    toast.error('Pin non valido')
+                }else{
+                    setStep(2);
+                }
+            })
         } if (step === 2) {
             dispatch(changePass({ password: password.current.value, email: currentEmail }))
                 .then((res) => {
                     if (res.payload.status === 200) {
                         dispatch(reset());
                         navigate('/login');
+                    }else if(res.payload.status === 400 ){
+                        console.log(res.payload);
+                        res.payload.data.errors.forEach((error) => toast.error(error.msg))
                     }
                 });
         }

@@ -77,7 +77,10 @@ export default function Profile() {
                         <div className="userProfile">
                             <div className="d-flex align-items-center">
                                 <div className="position-relative">
-                                    <Image id="avatar" src={profile?.avatar} alt='avatar' roundedCircle width={150} height={150} />
+                                    <div className="image-profile">
+                                        <img id="avatar" src={profile?.avatar} alt='avatar'/>
+                                    </div>
+                                    
                                     {!id && <div className="change"  onClick={handleAvatarClick}>
                                         <RxUpdate size={20} />
                                         <input
