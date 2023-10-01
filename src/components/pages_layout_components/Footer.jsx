@@ -25,8 +25,9 @@ export default function Footer() {
 
                 Designed by
                 <div class="credits">
-                    <a target="_blank" href="#"><img width="200" src={Logo} title="#" alt="#"/></a>
+                   <img width="200" src={Logo} title="#" alt="#"/>
                 </div>
+                <p class="text-center end-footer">© 2023 Jecko. All rights reserved.</p>
         </footer>
     )
 }

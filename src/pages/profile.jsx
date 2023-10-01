@@ -98,10 +98,7 @@ export default function Profile() {
                                     {profile?.city ? <span className="fs-6"><FaMapMarkerAlt /> {profile?.city}</span> : null}
                                 </div>
                             </div>
-                            <hr style={{
-                                width: "146px",
-                                transform: "rotate(90deg)"
-                            }} />
+                            
                             <div className="games">
                                 <p className="text-center">
                                     Partite create <br /> <span>{profile?.createdGames}</span>

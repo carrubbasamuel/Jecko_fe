@@ -1,176 +1,180 @@
-
-body{
-  padding-right: 0!important;
+body {
+  padding-right: 0 !important;
 }
 
-  #field-details::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-  }
-  #field-details::-webkit-scrollbar-thumb {
-    display: none;
+
+#field-details::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+#field-details::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+#field-details h5 {
+  font-size: 26px;
+  font-weight: bold;
+  color: green;
+  padding-bottom: 5px;
+
+}
+
+#eventDate {
+  margin: 10px;
+  background-color: blueviolet;
+  color: #fff;
+  border-radius: 20px;
+  padding: 15px;
+}
+
+#eventDate a {
+  color: #fff !important;
+}
+
+.accordion-body>div:last-of-type p {
+  padding: 10px;
+}
+
+.accordion-body {
+  padding: 0 !important;
+}
+
+.accordion-body>p {
+  padding: 10px;
+  text-align: center;
+}
+
+.joinButton {
+  margin: 15px;
+
+}
+
+
+.scrollable-content {
+  padding-top: 5px;
+  overflow-y: auto;
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.currentEvent {
+  background-color: rgba(2, 57, 2, 0.826);
+  color: white;
+
+  padding: 20px;
+
+  display: flex;
+  width: 100%;
+  height: 20px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.eventCardDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 90%;
+  max-height: 90%;
+  width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+.eventBox {
+  width: 100%;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #fff !important;
+
+}
+
+.accordion-button:not(.collapsed)::after {
+  color: #fff !important;
+}
+
+
+
+.sender button:hover {
+  background-color: #eaeaea;
+}
+
+
+
+.setterEvent .form-label {
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.setterEvent .form-control {
+  margin-bottom: 5px;
+}
+
+.setterEvent {
+  animation: opacity 0.3s ease-in-out forwards;
+}
+
+.setterEvent label {
+  color: green;
+
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
   }
 
-  #field-details h5{
-    font-size: 26px;
-    font-weight: bold;
-    color: green;
-    padding-bottom: 5px;
-  
+  100% {
+    opacity: 1;
   }
-  
-  #eventDate{
-    margin: 10px;
-    background-color: blueviolet;
-    color: #fff;
-    border-radius: 20px;
-    padding: 15px;
-  }
+}
 
-  #eventDate a{
-    color: #fff!important;
-  }
+.image-cover {
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  position: relative;
+}
 
-  .accordion-body> div:last-of-type p{
-    padding:  10px;
-  }
+.image-cover img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
 
-  .accordion-body{
-    padding: 0!important;
-  }
-
-  .accordion-body>p{
-    padding: 10px;
-   text-align: center;
-  }
-
-  .joinButton{
-    margin: 15px;
-    
-  }
-  
-  
-  .scrollable-content {
-    padding-top: 5px;
-    overflow-y: auto;
-    flex-grow: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .scrollable-content::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-  }
-  
-  
-  .scrollable-content::-webkit-scrollbar-thumb {
-    display: none;
-  }
-  .currentEvent {
-    background-color: rgba(2, 57, 2, 0.826);
-    color: white;
-  
-    padding: 20px;
-    
-    display: flex;
-    width: 100%;
-    height: 20px;
-    justify-content: space-around;
-    align-items: center;
-  }
-  
-  .eventCardDetails {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 90%;
-    max-height: 90%;
-    width: 100%;
-  }
-  p{
-    margin: 0;
-  }
-  
-  .eventBox{
-    width: 100%;
-  }
-  
-  .accordion-button:focus {
-    box-shadow: none;
-  }
-  
-  .accordion-button:not(.collapsed) {
-    color: #fff!important;
-    
-  }
-  
-  .accordion-button:not(.collapsed)::after {
-    color: #fff!important;
-  }
-  
-  
-  
-  .sender button:hover{
-    background-color: #eaeaea;
-  }
-  
-  
-  
-  .setterEvent .form-label{
-    font-weight: bold;
-    padding-bottom: 5px;
-  }
-  
-  .setterEvent .form-control{
-    margin-bottom: 5px;
-  }
-  
-  .setterEvent{
-    animation: opacity 0.3s ease-in-out forwards;
-  }
-  .setterEvent label{
-    color: green;
-    
-  }
-  
-  @keyframes opacity {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  
-  .image-cover{
-    width: 100%;
-    height: 50%;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .image-cover img{
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-
-  .goto{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 10px;
-    border-radius: 50%!important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px;
-    color: #fff!important;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
-    z-index: 20;
-  }
-  
-  
+.goto {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  border-radius: 50% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  color: #fff !important;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  z-index: 20;
+}

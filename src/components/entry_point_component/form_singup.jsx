@@ -1,9 +1,10 @@
 
 import React, { useRef } from 'react';
 import { Button, FloatingLabel, Form, FormGroup } from 'react-bootstrap';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { Fade } from 'react-reveal';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchLogin, fetchSingup } from '../../redux/userReducer';
 import ImageUploader from './avatar';
 
@@ -47,6 +48,10 @@ export default function FormSignup() {
     }
 
     return (
+        <>
+        <Link to='/login' className='text-decoration-none text-dark '>
+            <Fade left><AiOutlineArrowLeft className='m-4 ms-0  me-0' size={34} /></Fade>
+        </Link>
         <Form onSubmit={handleSubmit} className="d-flex flex-column">
             <Fade bottom cascade>
                 <FormGroup controlId="floatingInput" label="Imagine di profilo" className="mb-5 d-flex justify-content-center">
@@ -98,5 +103,7 @@ export default function FormSignup() {
                 </div>
             </div>
         </Form>
+        </>
+        
     )
 }

@@ -1,12 +1,13 @@
-import { Accordion, Button, Image } from 'react-bootstrap';
+import { Accordion, Badge, Button, Image } from 'react-bootstrap';
 import { BsFillPinMapFill } from 'react-icons/bs';
 import { FaFlagCheckered } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { animated, useSpring } from 'react-spring';
 import { toast } from 'react-toastify';
 import useSocket from '../../Hooks/useSocket';
-import { fetchJoinInEvent } from '../../redux/eventReducer';
+import { fetchJoinInEvent, setShowDetails } from '../../redux/eventReducer';
 
 
 
@@ -44,29 +45,28 @@ export default function EventAccordion() {
                 </div>}
             <Accordion>
                 {events.map((event, index) => (
+                    
                     <Accordion.Item key={index} eventKey={index}>
-                        <Accordion.Header>{event.title}</Accordion.Header>
+                        <Accordion.Header><strong>{event.title}</strong>{event.inProgress && <Badge className='p-2 ms-3' bg="secondary"><AnimatedText /></Badge>}</Accordion.Header>
+                      
                         <Accordion.Body>
-                            <div id='eventDate' className='d-flex align-items-center justify-content-between'>
-                                <div>
-                                    <p className='d-flex align-items-center gap-2'><BsFillPinMapFill size={15} />{formatDate(event.dateStart)}</p>
-                                    <p className='d-flex align-items-center gap-2'><FaFlagCheckered size={15} />{formatDate(event.dateEnd)}</p>
-                                </div>
-                                <div className='d-flex flex-column align-items-center'>
-                                    <Image src={event.creator.avatar} roundedCircle width={40} className='shadow' height={40} />
-                                    <Link to={`/profile/${event.creator._id}`}><p className='ms-2'>{event.creator.username}</p></Link>
-                                </div>
-                            </div>
-                            <p>{event.description}</p>
-                            <div className='d-flex justify-content-between align-items-center'>
-                                <p className='text-muted'>{`${event.players.length} partecipanti`}</p>
-                                {!event.isMine && !event.imPlayer && <div className='text-end'>
-                                    <Button className='joinButton' variant='primary' onClick={() => handleClick(event)}>Partecipa!</Button>
-                                </div>}
-
-                            </div>
-
-
+                                    <div id='eventDate' className='d-flex align-items-center justify-content-between'>
+                                        <div>
+                                            <p className='d-flex align-items-center gap-2'><BsFillPinMapFill size={15} />{formatDate(event.dateStart)}</p>
+                                            <p className='d-flex align-items-center gap-2'><FaFlagCheckered size={15} />{formatDate(event.dateEnd)}</p>
+                                        </div>
+                                        <div className='d-flex flex-column align-items-center'>
+                                            <Image src={event.creator.avatar} roundedCircle width={40} className='shadow' height={40} />
+                                            <Link to={`/profile/${event.creator._id}`} onClick={()=>dispatch(setShowDetails(false))}><p className='ms-2'>{event.creator.username}</p></Link>
+                                        </div>
+                                    </div>
+                                    <p>{event.description}</p>
+                                    <div className='d-flex justify-content-between align-items-center'>
+                                        <p className='text-muted'>{`${event.players.length} partecipanti`}</p>
+                                        {!event.isMine && !event.imPlayer && !event.inProgress && <div className='text-end'>
+                                            <Button className='joinButton' variant='primary' onClick={() => handleClick(event)}>Partecipa!</Button>
+                                        </div>}
+                                    </div>
                         </Accordion.Body>
                     </Accordion.Item>
                 ))}
@@ -88,4 +88,17 @@ const handleRefreshPlayer = ({ eventTitle, playerAdded }) => {
             😁 Nuovo giocatore iscritto! <strong>{playerAdded.username}</strong> si è iscritto all'evento {eventTitle}
         </div>
     );
+}
+
+const AnimatedText = () => {
+    const props = useSpring({
+        loop: true,
+        to: [
+            { opacity: 1, color: 'white' },
+            { opacity: 0, color: 'rgb(14,26,19)' },
+        ],
+        from: { opacity: 0, color: 'red' },
+    })
+
+    return <animated.div style={props}>In corso...</animated.div>
 }

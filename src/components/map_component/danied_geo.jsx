@@ -1,20 +1,15 @@
 
-import Lottie from 'react-lottie'
-
+import noGeo from './nogeo.png'
 export default function DaniedGeolocation() {
-    const options={
-        loop: true,
-        autoplay: true,
-        animationData: require('./danied.json'),
-    }
+    
     return (
         <div className='d-flex justify-content-center align-items-center flex-column h-100'>
-            <h3>Non possiamo geolocalizzarti se tu non vuoi! 😢</h3>
-            <Lottie options={options} style={{
-                width: '100%',
-                height: '500px',
-               
-            }} />
+            
+            <img src={noGeo} alt='noGeo' height={50} width={50} className='mb-4'/>
+            <h1 className='text-center'>Geolocalizzazione non disponibile</h1>
+            <p className='text-center'>Per poter utilizzare Jecko è necessario abilitare la geolocalizzazione</p>
+
+
         </div>
     )
     

@@ -95,7 +95,7 @@ export default function EditModal({ show, handleClose }) {
                                         onChange={handleChange}
                                     />
                                 </Form.Group>
-                                <Button variant="primary" className='text-end m-2' onClick={handleSave}>
+                                <Button variant="primary" className='text-end m-3 ms-0' onClick={handleSave}>
                                     Salva Modifiche
                                 </Button>
                             </Form>
@@ -110,7 +110,7 @@ export default function EditModal({ show, handleClose }) {
                                 Verrano eliminati tutti i tuoi dati e non potrai più accedere al tuo profilo.
                                 inoltre verranno eliminati tutti gli eventi e le chat di cui sei amministratore.
                             </p>
-                            <Button variant="danger" className='m-2' onClick={() => dispatch(fetchDelateUser()).then(() => navigate('/login'))}>
+                            <Button variant="danger" className='m-3 d-flex  justify-content-end' onClick={() => dispatch(fetchDelateUser()).then(() => navigate('/login'))}>
                                 Elimina il tuo profilo
                             </Button>
                             </div>
